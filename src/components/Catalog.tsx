@@ -39,16 +39,17 @@ export default function Catalog() {
             className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft"
           >
             <div
-              className="grid aspect-square place-items-center p-4"
+              className="relative aspect-square w-full"
               style={{ background: `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)` }}
             >
               <img
                 src={p.image}
                 alt={p[lang].name}
                 loading="lazy"
-                className="h-full w-auto object-contain drop-shadow-xl"
+                className="absolute inset-0 h-full w-full object-contain p-4 drop-shadow-xl"
               />
             </div>
+
             <div className="flex min-w-0 flex-1 flex-col p-4">
               <h3 className="text-sm font-semibold text-card-foreground sm:text-base">{p[lang].name}</h3>
               <p className="mt-1 text-xs text-muted-foreground">{p.size}</p>
