@@ -94,7 +94,7 @@ export default function Hero() {
       {/* giant ghost wordmark */}
       <div
         className="pointer-events-none absolute inset-x-0 select-none text-center font-display leading-[0.8] text-white"
-        style={{ top: "18%", zIndex: 2, fontSize: "clamp(90px, 28vw, 380px)", letterSpacing: "-0.02em", opacity: 1 }}
+        style={{ top: "12%", zIndex: 2, fontSize: "clamp(90px, 28vw, 380px)", letterSpacing: "-0.02em", opacity: 1 }}
       >
         PROCLEAN
       </div>
@@ -169,7 +169,7 @@ export default function Hero() {
 
       <a
         href="#catalog"
-        className="absolute bottom-8 right-4 flex items-center gap-2 font-display text-xl text-white sm:right-8 sm:text-2xl"
+        className="absolute bottom-24 right-4 flex items-center gap-2 sm:bottom-28 font-display text-xl text-white sm:right-8 sm:text-2xl"
         style={{ zIndex: 60 }}
       >
         {t("discover")}
