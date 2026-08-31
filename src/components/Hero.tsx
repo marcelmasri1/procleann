@@ -56,11 +56,12 @@ export default function Hero() {
 
   const styleFor = (role: Role) => {
     const base = {
-      center: { scale: mobile ? 1.25 : 1.68, blur: 0, opacity: 1, z: 20, left: "50%", height: mobile ? "60%" : "92%" },
-      left: { scale: 1, blur: 2, opacity: 0.85, z: 10, left: mobile ? "20%" : "30%", height: mobile ? "42%" : "62%" },
-      right: { scale: 1, blur: 2, opacity: 0.85, z: 10, left: mobile ? "80%" : "70%", height: mobile ? "42%" : "62%" },
-      back: { scale: 1, blur: 4, opacity: 1, z: 5, left: "50%", height: mobile ? "38%" : "56%" },
+      center: { scale: mobile ? 1.25 : 1.5, blur: 0, opacity: 1, z: 20, left: "50%", height: mobile ? "42%" : "55%" },
+      left: { scale: 1, blur: 2, opacity: 0.85, z: 10, left: mobile ? "18%" : "28%", height: mobile ? "30%" : "40%" },
+      right: { scale: 1, blur: 2, opacity: 0.85, z: 10, left: mobile ? "82%" : "72%", height: mobile ? "30%" : "40%" },
+      back: { scale: 1, blur: 4, opacity: 1, z: 5, left: "50%", height: mobile ? "26%" : "34%" },
     }[role];
+
     return {
       left: base.left,
       height: base.height,
