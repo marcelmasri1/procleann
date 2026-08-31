@@ -1,24 +1,44 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { Toaster } from "sonner";
+import { AppProviders } from "@/lib/store";
+import Hero from "@/components/Hero";
+import Catalog from "@/components/Catalog";
+import CartDrawer from "@/components/CartDrawer";
+import TopBar from "@/components/TopBar";
+import Footer from "@/components/Footer";
 
-// No head() here: the home route inherits title/description/og/twitter from
-// __root.tsx, and ships no og:image so serve-time hosting can inject the
-// project's social preview (explicit og:image or latest screenshot).
 export const Route = createFileRoute("/")({
+  head: () => ({
+    meta: [
+      { title: "ProClean Detergents — Household Cleaning Products in Lebanon" },
+      {
+        name: "description",
+        content:
+          "Shop ProClean Detergents: surface cleaners, laundry liquid, dishwashing liquid, bleach and hand soap. Order online or checkout via WhatsApp.",
+      },
+      { property: "og:title", content: "ProClean Detergents — Professional Clean" },
+      {
+        property: "og:description",
+        content: "Eleven cleaning formulas for surfaces, laundry, dishes and hands. Order online or via WhatsApp.",
+      },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
+    ],
+  }),
   component: Index,
 });
 
-// IMPORTANT: Replace this placeholder. See ./README.md for routing conventions.
 function Index() {
   return (
-    <div
-      className="flex min-h-screen items-center justify-center"
-      style={{ backgroundColor: "#fcfbf8" }}
-    >
-      <img
-        data-lovable-blank-page-placeholder="REMOVE_THIS"
-        src="https://cdn.gpteng.co/blank-app-v1.svg"
-        alt="Your app will live here!"
-      />
-    </div>
+    <AppProviders>
+      <main className="min-h-screen bg-background">
+        <TopBar />
+        <Hero />
+        <Catalog />
+        <Footer />
+        <CartDrawer />
+        <Toaster position="top-center" richColors />
+      </main>
+    </AppProviders>
   );
 }
