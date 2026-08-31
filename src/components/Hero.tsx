@@ -56,22 +56,47 @@ export default function Hero() {
 
   const styleFor = (role: Role) => {
     const base = {
-      center: { scale: mobile ? 1.25 : 1.5, blur: 0, opacity: 1, z: 20, left: "50%", height: mobile ? "42%" : "55%" },
-      left: { scale: 1, blur: 2, opacity: 0.85, z: 10, left: mobile ? "18%" : "28%", height: mobile ? "30%" : "40%" },
-      right: { scale: 1, blur: 2, opacity: 0.85, z: 10, left: mobile ? "82%" : "72%", height: mobile ? "30%" : "40%" },
-      back: { scale: 1, blur: 4, opacity: 1, z: 5, left: "50%", height: mobile ? "26%" : "34%" },
+      center: {
+        blur: 0,
+        opacity: 1,
+        z: 20,
+        left: "50%",
+        size: mobile ? "min(52vh, 68vw)" : "min(62vh, 42vw)",
+      },
+      left: {
+        blur: 2,
+        opacity: 0.85,
+        z: 10,
+        left: mobile ? "16%" : "26%",
+        size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
+      },
+      right: {
+        blur: 2,
+        opacity: 0.85,
+        z: 10,
+        left: mobile ? "84%" : "74%",
+        size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
+      },
+      back: {
+        blur: 4,
+        opacity: 1,
+        z: 5,
+        left: "50%",
+        size: mobile ? "min(24vh, 28vw)" : "min(30vh, 18vw)",
+      },
     }[role];
 
     return {
       left: base.left,
-      height: base.height,
+      height: base.size,
       zIndex: base.z,
       opacity: base.opacity,
       filter: base.blur ? `blur(${base.blur}px)` : "none",
-      transform: `translate(-50%, -50%) scale(${base.scale})`,
+      transform: "translate(-50%, -50%)",
       transition: `all ${EASE}`,
     } as const;
   };
+
 
   const current = PRODUCTS[active]!;
 
