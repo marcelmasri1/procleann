@@ -23,7 +23,7 @@ const COPY = {
   discover: { en: "DISCOVER IT", ar: "تسوّق الآن" },
   catalog: { en: "THE CATALOG", ar: "المنتجات" },
   catalogBlurb: {
-    en: "Eleven formulas. One standard of clean.",
+    en: "Many formulas. One standard of clean.",
     ar: "إحدى عشرة تركيبة. معيار واحد للنظافة.",
   },
   add: { en: "Add to cart", ar: "أضف إلى السلة" },
