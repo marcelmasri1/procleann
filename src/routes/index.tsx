@@ -19,7 +19,7 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ProClean Detergents — Professional Clean" },
       {
         property: "og:description",
-        content: "Eleven cleaning formulas for surfaces, laundry, dishes and hands. Order online or via WhatsApp.",
+        content: "Many cleaning formulas for surfaces, laundry, dishes and hands. Order online or via WhatsApp.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },

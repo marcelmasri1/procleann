@@ -24,7 +24,7 @@ const COPY = {
   catalog: { en: "THE CATALOG", ar: "المنتجات" },
   catalogBlurb: {
     en: "Many formulas. One standard of clean.",
-    ar: "إحدى عشرة تركيبة. معيار واحد للنظافة.",
+    ar: "تركيبات عديدة. معيار واحد للنظافة.",
   },
   add: { en: "Add to cart", ar: "أضف إلى السلة" },
   added: { en: "Added", ar: "تمت الإضافة" },

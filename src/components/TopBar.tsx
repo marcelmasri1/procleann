@@ -6,7 +6,10 @@ export default function TopBar() {
   const { dark, toggle } = useTheme();
 
   return (
-    <div className="fixed top-5 end-4 z-[70] flex items-center gap-2 sm:end-8">
+    <div
+      dir="ltr"
+      className="fixed top-5 right-4 z-[70] flex items-center gap-2 sm:right-8"
+    >
       <button
         onClick={() => setLang(lang === "en" ? "ar" : "en")}
         className="inline-flex items-center gap-1 rounded-full border border-white/50 bg-foreground/20 px-3 py-2 text-xs font-semibold text-white backdrop-blur transition-colors hover:bg-foreground/30"
