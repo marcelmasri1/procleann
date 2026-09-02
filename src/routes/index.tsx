@@ -6,6 +6,7 @@ import Catalog from "@/components/Catalog";
 import CartDrawer from "@/components/CartDrawer";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
+import NetworkStatus from "@/components/NetworkStatus";
 
 export const Route = createFileRoute("/")({
   head: () => ({
