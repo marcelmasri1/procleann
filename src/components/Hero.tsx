@@ -19,10 +19,19 @@ export default function Hero() {
   const [mobile, setMobile] = useState(false);
   const [entered, setEntered] = useState(false);
 
-  // subtle fade + scale entrance on first paint
+  // subtle fade + rise entrance on first paint.
+  // a single requestAnimationFrame can fire before the browser has painted
+  // the initial (hidden) state, which makes the transition invisible — so
+  // we wait two frames to guarantee the "before" state is actually shown first.
   useEffect(() => {
-    const raf = requestAnimationFrame(() => setEntered(true));
-    return () => cancelAnimationFrame(raf);
+    let raf2 = 0;
+    const raf1 = requestAnimationFrame(() => {
+      raf2 = requestAnimationFrame(() => setEntered(true));
+    });
+    return () => {
+      cancelAnimationFrame(raf1);
+      cancelAnimationFrame(raf2);
+    };
   }, []);
 
   useEffect(() => {
@@ -124,8 +133,8 @@ export default function Hero() {
       style={{
         backgroundColor: current.color,
         opacity: entered ? 1 : 0,
-        transform: entered ? "scale(1)" : "scale(1.02)",
-        transition: `background-color ${EASE}, opacity 700ms ease-out, transform 700ms ease-out`,
+        transform: entered ? "translateY(0) scale(1)" : "translateY(14px) scale(1.02)",
+        transition: `background-color ${EASE}, opacity 750ms ease-out, transform 750ms ease-out`,
       }}
       aria-label="ProClean hero"
     >
@@ -168,8 +177,10 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* bottle stack */}
-      <div className="absolute inset-0" style={{ zIndex: 4 }}>
+      {/* bottle stack — no z-index here on purpose: each bottle sets its own,
+          so the side/back ones can sit behind the wordmark below while the
+          active one sits in front of it */}
+      <div className="absolute inset-0">
         {PRODUCTS.map((p, i) => {
           const role = roleOf(i);
           if (!role) return null;

@@ -138,11 +138,11 @@ export const PRODUCTS: Product[] = [
     color: "#7FA9CC",
     panel: "#9CC0DD",
     en: {
-      name: "Anti-Bacterial Liquid Hand Soap",
+      name: "Dove Anti-Bacterial Hand Soap",
       desc: "Gentle, moisturizing liquid hand gel designed to eliminate germs without drying out skin. Formulated with a soft, pleasant fragrance suitable for daily family use.",
     },
     ar: {
-      name: "صابون يدين سائل مضاد للبكتيريا",
+      name: "دوف — صابون يدين مضاد للبكتيريا",
       desc: "جل يدين سائل لطيف ومرطب، مصمم للقضاء على الجراثيم دون تجفيف البشرة. برائحة ناعمة ولطيفة تناسب الاستخدام اليومي لجميع أفراد العائلة.",
     },
   },
@@ -155,11 +155,11 @@ export const PRODUCTS: Product[] = [
     color: "#8558B8",
     panel: "#A278CF",
     en: {
-      name: "Floral Cleaner — Purple",
+      name: "Floral Cleaner — Lavender",
       desc: "Multi-surface home cleaner that provides a soft floral touch. Combines powerful surface cleaning with a soothing, long-lasting lavender fragrance.",
     },
     ar: {
-      name: "منظف الأزهار — بنفسجي",
+      name: "منظف الأزهار — لافندر",
       desc: "منظف منزلي متعدد الأسطح بلمسة زهرية ناعمة، يجمع بين قوة التنظيف ورائحة اللافندر المهدئة التي تدوم طويلاً.",
     },
   },
@@ -172,11 +172,11 @@ export const PRODUCTS: Product[] = [
     color: "#DC3E77",
     panel: "#EC6394",
     en: {
-      name: "Floral Cleaner — Pink",
+      name: "Floral Cleaner — Cammy",
       desc: "All-in-one floor and surface cleaner that removes dirt and grime while leaving rooms filled with a long-lasting, fresh blooming floral scent.",
     },
     ar: {
-      name: "منظف الأزهار — وردي",
+      name: "منظف الأزهار — كامي",
       desc: "منظف شامل للأرضيات والأسطح يزيل الأوساخ والأتربة، ويترك المنزل معطراً برائحة زهور منعشة تدوم طويلاً.",
     },
   },
@@ -189,11 +189,11 @@ export const PRODUCTS: Product[] = [
     color: "#2AA3C2",
     panel: "#4FBBD6",
     en: {
-      name: "Floral Cleaner — Blue",
+      name: "Floral Cleaner — Ocean Breeze",
       desc: "Multi-surface floor and home cleaner infused with a fresh ocean wave floral fragrance. Specially formulated to remove dirt and daily grime while keeping your home smelling clean and invigorated all day long.",
     },
     ar: {
-      name: "منظف الأزهار — أزرق",
+      name: "منظف الأزهار — نسيم المحيط",
       desc: "منظف متعدد الأسطح للأرضيات والمنزل، بعبق زهري منعش يشبه أمواج المحيط. تركيبة خاصة لإزالة الأوساخ اليومية مع الحفاظ على انتعاش المنزل طوال اليوم.",
     },
   },

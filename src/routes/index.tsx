@@ -3,6 +3,7 @@ import { Toaster } from "sonner";
 import { AppProviders } from "@/lib/store";
 import Hero from "@/components/Hero";
 import Catalog from "@/components/Catalog";
+import VideoTeaser from "@/components/VideoTeaser";
 import CartDrawer from "@/components/CartDrawer";
 import TopBar from "@/components/TopBar";
 import Footer from "@/components/Footer";
@@ -19,7 +20,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "ProClean Detergents — Professional Clean" },
       {
         property: "og:description",
-        content: "Many cleaning formulas for surfaces, laundry, dishes and hands. Order online or via WhatsApp.",
+        content:
+          "Many cleaning formulas for surfaces, laundry, dishes and hands. Order online or via WhatsApp.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -35,6 +37,7 @@ function Index() {
         <TopBar />
         <Hero />
         <Catalog />
+        <VideoTeaser />
         <Footer />
         <CartDrawer />
         <Toaster position="top-center" richColors />

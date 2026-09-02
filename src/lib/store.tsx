@@ -52,6 +52,11 @@ const COPY = {
     ar: "طلبك جاهز — فقط اضغط إرسال في واتساب لإتمامه.",
   },
   video: { en: "IN ACTION", ar: "شاهد المنتج" },
+  videoBlurb: {
+    en: "See ProClean in action — check this out.",
+    ar: "شاهد بروكلين في العمل — ألقِ نظرة.",
+  },
+  videoCta: { en: "Watch on Instagram", ar: "شاهد على إنستغرام" },
   follow: { en: "Follow ProClean", ar: "تابع بروكلين" },
   rights: { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
 } as const;
