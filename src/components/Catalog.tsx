@@ -1,12 +1,59 @@
-import { useState } from "react";
-import { Plus } from "lucide-react";
+import { useEffect, useState } from "react";
+import { ImageOff, Plus } from "lucide-react";
+import { toast } from "sonner";
 import { CATEGORIES, PRODUCTS, type Category } from "@/data/products";
-import { useCart, useLang } from "@/lib/store";
+import { FOCUS_EVENT, useCart, useLang } from "@/lib/store";
+
+function ProductImage({ src, alt, failLabel }: { src: string; alt: string; failLabel: string }) {
+  const [loaded, setLoaded] = useState(false);
+  const [failed, setFailed] = useState(false);
+
+  if (failed) {
+    return (
+      <div className="absolute inset-0 grid place-items-center gap-1 p-4 text-center text-white/90">
+        <ImageOff className="h-6 w-6" />
+        <span className="text-[10px] font-medium">{failLabel}</span>
+      </div>
+    );
+  }
+
+  return (
+    <>
+      {!loaded && <div className="absolute inset-0 animate-pulse bg-white/20" aria-hidden />}
+      <img
+        src={src}
+        alt={alt}
+        loading="lazy"
+        onLoad={() => setLoaded(true)}
+        onError={() => setFailed(true)}
+        className={`absolute inset-0 h-full w-full object-contain p-4 drop-shadow-xl transition-opacity duration-300 ${
+          loaded ? "opacity-100" : "opacity-0"
+        }`}
+      />
+    </>
+  );
+}
 
 export default function Catalog() {
   const { lang, t } = useLang();
   const { add, setOpen } = useCart();
   const [filter, setFilter] = useState<"all" | Category>("all");
+  const [highlight, setHighlight] = useState<string | null>(null);
+
+  // hero bottle click → reveal, scroll to and highlight the matching card
+  useEffect(() => {
+    const onFocus = (e: Event) => {
+      const id = (e as CustomEvent<string>).detail;
+      setFilter("all");
+      setHighlight(id);
+      window.setTimeout(() => {
+        document.getElementById(`product-${id}`)?.scrollIntoView({ behavior: "smooth", block: "center" });
+      }, 60);
+      window.setTimeout(() => setHighlight((h) => (h === id ? null : h)), 2600);
+    };
+    window.addEventListener(FOCUS_EVENT, onFocus);
+    return () => window.removeEventListener(FOCUS_EVENT, onFocus);
+  }, []);
 
   const shown = filter === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter);
 
@@ -36,18 +83,18 @@ export default function Catalog() {
         {shown.map((p) => (
           <article
             key={p.id}
-            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft"
+            id={`product-${p.id}`}
+            className={`flex scroll-mt-24 flex-col overflow-hidden rounded-2xl border bg-card shadow-soft transition-all duration-500 ${
+              highlight === p.id
+                ? "border-primary ring-2 ring-primary ring-offset-2 ring-offset-background"
+                : "border-border"
+            }`}
           >
             <div
               className="relative aspect-square w-full"
               style={{ background: `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)` }}
             >
-              <img
-                src={p.image}
-                alt={p[lang].name}
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-contain p-4 drop-shadow-xl"
-              />
+              <ProductImage src={p.image} alt={p[lang].name} failLabel={t("imgFail")} />
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col p-4">
@@ -59,7 +106,7 @@ export default function Catalog() {
                 <button
                   onClick={() => {
                     add(p.id);
-                    setOpen(true);
+                    toast.success(`${p[lang].name} — ${t("addedToast")}`);
                   }}
                   className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"
                 >
