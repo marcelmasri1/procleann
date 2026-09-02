@@ -160,3 +160,19 @@
   }
 }
 
+@keyframes pc-highlight {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-ring) 0%, transparent);
+  }
+  20% {
+    box-shadow: 0 0 0 6px color-mix(in oklab, var(--color-ring) 55%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--color-ring) 0%, transparent);
+  }
+}
+
+.pc-highlight {
+  animation: pc-highlight 1.6s ease-out;
+}
+

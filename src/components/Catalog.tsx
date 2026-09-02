@@ -1,5 +1,6 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
+import { toast } from "sonner";
 import { CATEGORIES, PRODUCTS, type Category } from "@/data/products";
 import { useCart, useLang } from "@/lib/store";
 
@@ -36,7 +37,8 @@ export default function Catalog() {
         {shown.map((p) => (
           <article
             key={p.id}
-            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft"
+            id={`product-${p.id}`}
+            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow scroll-mt-24"
           >
             <div
               className="relative aspect-square w-full"
@@ -51,14 +53,19 @@ export default function Catalog() {
             </div>
 
             <div className="flex min-w-0 flex-1 flex-col p-4">
-              <h3 className="text-sm font-semibold text-card-foreground sm:text-base">{p[lang].name}</h3>
+              <h3 className="text-sm font-semibold text-card-foreground sm:text-base">
+                {p[lang].name}
+              </h3>
               <p className="mt-1 text-xs text-muted-foreground">{p.size}</p>
-              <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{p[lang].desc}</p>
+              <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+                {p[lang].desc}
+              </p>
               <div className="mt-4 flex items-center justify-between gap-3">
                 <span className="font-display text-xl text-foreground">${p.price.toFixed(2)}</span>
                 <button
                   onClick={() => {
                     add(p.id);
+                    toast.success(`${t("added")}: ${p[lang].name}`);
                     setOpen(true);
                   }}
                   className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"

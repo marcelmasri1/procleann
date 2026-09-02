@@ -34,12 +34,23 @@ const COPY = {
   clear: { en: "Clear list", ar: "إفراغ القائمة" },
   waCheckout: { en: "Checkout via WhatsApp", ar: "إتمام الطلب عبر واتساب" },
   saveOrder: { en: "Place order", ar: "إرسال الطلب" },
-  name: { en: "Full name", ar: "الاسم الكامل" },
+  firstName: { en: "First name", ar: "الاسم الأول" },
+  lastName: { en: "Last name", ar: "اسم العائلة" },
   phone: { en: "Phone number", ar: "رقم الهاتف" },
   address: { en: "Address (optional)", ar: "العنوان (اختياري)" },
   note: { en: "Note (optional)", ar: "ملاحظة (اختياري)" },
-  orderOk: { en: "Order received. We'll call you shortly.", ar: "تم استلام طلبك. سنتواصل معك قريباً." },
-  orderFail: { en: "Could not send the order. Please try WhatsApp.", ar: "تعذّر إرسال الطلب. جرّب واتساب." },
+  orderOk: {
+    en: "Order received. We'll call you shortly.",
+    ar: "تم استلام طلبك. سنتواصل معك قريباً.",
+  },
+  orderFail: {
+    en: "Could not send the order. Please try WhatsApp.",
+    ar: "تعذّر إرسال الطلب. جرّب واتساب.",
+  },
+  waRedirect: {
+    en: "Your order is ready — just hit send in WhatsApp to complete it.",
+    ar: "طلبك جاهز — فقط اضغط إرسال في واتساب لإتمامه.",
+  },
   video: { en: "IN ACTION", ar: "شاهد المنتج" },
   follow: { en: "Follow ProClean", ar: "تابع بروكلين" },
   rights: { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
@@ -119,7 +130,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
   const setQty = useCallback((id: string, qty: number) => {
     setLines((prev) =>
-      qty <= 0 ? prev.filter((l) => l.id !== id) : prev.map((l) => (l.id === id ? { ...l, qty } : l)),
+      qty <= 0
+        ? prev.filter((l) => l.id !== id)
+        : prev.map((l) => (l.id === id ? { ...l, qty } : l)),
     );
   }, []);
 
@@ -183,9 +196,13 @@ export const LINKS = {
 };
 
 export function whatsappUrl(lines: { product: Product; qty: number }[], total: number, lang: Lang) {
-  const head = "Hello ProClean! I would like more information or to place an order for my shopping cart.";
+  const head =
+    "Hello ProClean! I would like more information or to place an order for my shopping cart.";
   const body = lines
-    .map((l) => `• ${l.product[lang].name} (${l.product.size}) x${l.qty} — $${(l.product.price * l.qty).toFixed(2)}`)
+    .map(
+      (l) =>
+        `• ${l.product[lang].name} (${l.product.size}) x${l.qty} — $${(l.product.price * l.qty).toFixed(2)}`,
+    )
     .join("\n");
   const text = lines.length ? `${head}\n\n${body}\n\nTotal: $${total.toFixed(2)}` : head;
   return `${LINKS.whatsapp}?text=${encodeURIComponent(text)}`;

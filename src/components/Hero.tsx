@@ -17,6 +17,13 @@ export default function Hero() {
   const [active, setActive] = useState(0);
   const locked = useRef(false);
   const [mobile, setMobile] = useState(false);
+  const [entered, setEntered] = useState(false);
+
+  // subtle fade + scale entrance on first paint
+  useEffect(() => {
+    const raf = requestAnimationFrame(() => setEntered(true));
+    return () => cancelAnimationFrame(raf);
+  }, []);
 
   useEffect(() => {
     const mq = window.matchMedia("(max-width: 767px)");
@@ -46,6 +53,18 @@ export default function Hero() {
     [n],
   );
 
+  const scrollToCatalog = useCallback(() => {
+    document.getElementById("catalog")?.scrollIntoView({ behavior: "smooth", block: "start" });
+  }, []);
+
+  const scrollToProduct = useCallback((id: string) => {
+    const el = document.getElementById(`product-${id}`);
+    if (!el) return;
+    el.scrollIntoView({ behavior: "smooth", block: "center" });
+    el.classList.add("pc-highlight");
+    window.setTimeout(() => el.classList.remove("pc-highlight"), 1600);
+  }, []);
+
   const roleOf = (i: number): Role | null => {
     if (i === active) return "center";
     if (i === (active + n - 1) % n) return "left";
@@ -66,21 +85,21 @@ export default function Hero() {
       left: {
         blur: 2,
         opacity: 0.85,
-        z: 10,
+        z: 1,
         left: mobile ? "16%" : "26%",
         size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
       },
       right: {
         blur: 2,
         opacity: 0.85,
-        z: 10,
+        z: 1,
         left: mobile ? "84%" : "74%",
         size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
       },
       back: {
         blur: 4,
         opacity: 1,
-        z: 5,
+        z: 1,
         left: "50%",
         size: mobile ? "min(24vh, 28vw)" : "min(30vh, 18vw)",
       },
@@ -97,13 +116,17 @@ export default function Hero() {
     } as const;
   };
 
-
   const current = PRODUCTS[active]!;
 
   return (
     <section
       className="relative h-[100vh] w-full overflow-hidden"
-      style={{ backgroundColor: current.color, transition: `background-color ${EASE}` }}
+      style={{
+        backgroundColor: current.color,
+        opacity: entered ? 1 : 0,
+        transform: entered ? "scale(1)" : "scale(1.02)",
+        transition: `background-color ${EASE}, opacity 700ms ease-out, transform 700ms ease-out`,
+      }}
       aria-label="ProClean hero"
     >
       {/* soft panel wash of the same hue */}
@@ -119,7 +142,13 @@ export default function Hero() {
       {/* giant ghost wordmark */}
       <div
         className="pointer-events-none absolute inset-x-0 select-none text-center font-display leading-[0.8] text-white"
-        style={{ top: "12%", zIndex: 2, fontSize: "clamp(90px, 28vw, 380px)", letterSpacing: "-0.02em", opacity: 1 }}
+        style={{
+          top: "12%",
+          zIndex: 2,
+          fontSize: "clamp(90px, 28vw, 380px)",
+          letterSpacing: "-0.02em",
+          opacity: 1,
+        }}
       >
         PROCLEAN
       </div>
@@ -144,6 +173,25 @@ export default function Hero() {
         {PRODUCTS.map((p, i) => {
           const role = roleOf(i);
           if (!role) return null;
+          if (role === "center") {
+            return (
+              <button
+                key={p.id}
+                type="button"
+                onClick={() => scrollToProduct(p.id)}
+                aria-label={p[lang].name}
+                className="absolute top-1/2 w-auto cursor-pointer border-0 bg-transparent p-0"
+                style={styleFor(role)}
+              >
+                <img
+                  src={p.image}
+                  alt={p[lang].name}
+                  draggable={false}
+                  className="h-full w-auto object-contain drop-shadow-2xl"
+                />
+              </button>
+            );
+          }
           return (
             <img
               key={p.id}
@@ -164,14 +212,11 @@ export default function Hero() {
       />
 
       {/* bottom controls */}
-      <div
-        className="absolute bottom-8 left-4 max-w-sm sm:left-8"
-        style={{ zIndex: 60 }}
-      >
+      <div className="absolute bottom-8 left-4 max-w-sm sm:left-8" style={{ zIndex: 60 }}>
         <p className="font-display text-2xl text-white sm:text-3xl">{t("heroKicker")}</p>
         <p className="mt-1 text-sm font-medium text-white/90">{current[lang].name}</p>
         <p className="mt-2 line-clamp-3 text-xs text-white/75">{current[lang].desc}</p>
-        <div className="mt-4 flex items-center gap-3">
+        <div dir="ltr" className="mt-4 flex items-center gap-3">
           <button
             onClick={() => move(-1)}
             aria-label="Previous product"
@@ -192,14 +237,15 @@ export default function Hero() {
         </div>
       </div>
 
-      <a
-        href="#catalog"
-        className="absolute bottom-24 right-4 flex items-center gap-2 sm:bottom-28 font-display text-xl text-white sm:right-8 sm:text-2xl"
+      <button
+        type="button"
+        onClick={scrollToCatalog}
+        className="absolute bottom-24 right-4 flex items-center gap-2 border-0 bg-transparent p-0 sm:bottom-28 font-display text-xl text-white sm:right-8 sm:text-2xl"
         style={{ zIndex: 60 }}
       >
         {t("discover")}
         <ArrowRight className="h-6 w-6" />
-      </a>
+      </button>
     </section>
   );
 }

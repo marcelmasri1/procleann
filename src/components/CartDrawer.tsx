@@ -9,11 +9,18 @@ export default function CartDrawer() {
   const { lang, t } = useLang();
   const { open, setOpen, detailed, setQty, clear, total, count } = useCart();
   const submit = useServerFn(placeOrder);
-  const [form, setForm] = useState({ name: "", phone: "", address: "", note: "" });
+  const [form, setForm] = useState({
+    firstName: "",
+    lastName: "",
+    phone: "",
+    address: "",
+    note: "",
+  });
   const [busy, setBusy] = useState(false);
 
   const send = async () => {
-    if (form.name.trim().length < 2 || form.phone.trim().length < 6 || !detailed.length) {
+    const fullName = `${form.firstName.trim()} ${form.lastName.trim()}`.trim();
+    if (fullName.length < 2 || form.phone.trim().length < 6 || !detailed.length) {
       toast.error(t("orderFail"));
       return;
     }
@@ -21,7 +28,7 @@ export default function CartDrawer() {
     try {
       const res = await submit({
         data: {
-          customer_name: form.name,
+          customer_name: fullName,
           customer_phone: form.phone,
           address: form.address,
           note: form.note,
@@ -69,7 +76,11 @@ export default function CartDrawer() {
           <aside className="absolute inset-y-0 end-0 flex w-full max-w-md flex-col bg-card shadow-2xl">
             <header className="grid grid-cols-[minmax(0,1fr)_auto] items-center gap-4 border-b border-border p-4">
               <h2 className="truncate font-display text-2xl text-card-foreground">{t("cart")}</h2>
-              <button onClick={() => setOpen(false)} aria-label="Close" className="shrink-0 text-muted-foreground">
+              <button
+                onClick={() => setOpen(false)}
+                aria-label="Close"
+                className="shrink-0 text-muted-foreground"
+              >
                 <X className="h-5 w-5" />
               </button>
             </header>
@@ -78,7 +89,10 @@ export default function CartDrawer() {
               {!detailed.length && <p className="text-sm text-muted-foreground">{t("empty")}</p>}
               <ul className="space-y-3">
                 {detailed.map(({ product, qty }) => (
-                  <li key={product.id} className="flex items-center gap-3 rounded-xl border border-border p-2">
+                  <li
+                    key={product.id}
+                    className="flex items-center gap-3 rounded-xl border border-border p-2"
+                  >
                     <div
                       className="grid h-16 w-16 shrink-0 place-items-center rounded-lg"
                       style={{ background: product.panel }}
@@ -86,7 +100,9 @@ export default function CartDrawer() {
                       <img src={product.image} alt="" className="h-14 w-auto object-contain" />
                     </div>
                     <div className="min-w-0 flex-1">
-                      <p className="truncate text-sm font-semibold text-card-foreground">{product[lang].name}</p>
+                      <p className="truncate text-sm font-semibold text-card-foreground">
+                        {product[lang].name}
+                      </p>
                       <p className="text-xs text-muted-foreground">
                         {product.size} · ${product.price.toFixed(2)}
                       </p>
@@ -121,12 +137,20 @@ export default function CartDrawer() {
 
               {detailed.length > 0 && (
                 <div className="mt-6 space-y-2">
-                  <input
-                    value={form.name}
-                    onChange={(e) => setForm({ ...form, name: e.target.value })}
-                    placeholder={t("name")}
-                    className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
-                  />
+                  <div className="grid grid-cols-2 gap-2">
+                    <input
+                      value={form.firstName}
+                      onChange={(e) => setForm({ ...form, firstName: e.target.value })}
+                      placeholder={t("firstName")}
+                      className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                    />
+                    <input
+                      value={form.lastName}
+                      onChange={(e) => setForm({ ...form, lastName: e.target.value })}
+                      placeholder={t("lastName")}
+                      className="w-full rounded-lg border border-input bg-background px-3 py-2 text-sm"
+                    />
+                  </div>
                   <input
                     value={form.phone}
                     onChange={(e) => setForm({ ...form, phone: e.target.value })}
@@ -153,12 +177,17 @@ export default function CartDrawer() {
             <footer className="space-y-3 border-t border-border p-4">
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">{t("total")}</span>
-                <span className="font-display text-2xl text-card-foreground">${total.toFixed(2)}</span>
+                <span className="font-display text-2xl text-card-foreground">
+                  ${total.toFixed(2)}
+                </span>
               </div>
               <a
                 href={whatsappUrl(detailed, total, lang)}
                 target="_blank"
                 rel="noreferrer"
+                onClick={() => {
+                  if (detailed.length) toast.success(t("waRedirect"));
+                }}
                 className="block rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-accent-foreground"
               >
                 {t("waCheckout")}
@@ -171,7 +200,10 @@ export default function CartDrawer() {
                 {t("saveOrder")}
               </button>
               {detailed.length > 0 && (
-                <button onClick={clear} className="w-full text-xs text-muted-foreground hover:text-destructive">
+                <button
+                  onClick={clear}
+                  className="w-full text-xs text-muted-foreground hover:text-destructive"
+                >
                   {t("clear")}
                 </button>
               )}

@@ -1,14 +1,18 @@
 import { Languages, Moon, Sun } from "lucide-react";
-import { useLang, useTheme } from "@/lib/store";
+import { useCart, useLang, useTheme } from "@/lib/store";
 
 export default function TopBar() {
   const { lang, setLang } = useLang();
   const { dark, toggle } = useTheme();
+  const { open: cartOpen } = useCart();
 
   return (
     <div
       dir="ltr"
-      className="fixed top-5 right-4 z-[70] flex items-center gap-2 sm:right-8"
+      aria-hidden={cartOpen}
+      className={`fixed top-5 right-4 z-[70] flex items-center gap-2 transition-opacity duration-300 sm:right-8 ${
+        cartOpen ? "pointer-events-none opacity-0" : "opacity-100"
+      }`}
     >
       <button
         onClick={() => setLang(lang === "en" ? "ar" : "en")}
