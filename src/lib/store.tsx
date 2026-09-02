@@ -40,10 +40,32 @@ const COPY = {
   note: { en: "Note (optional)", ar: "ملاحظة (اختياري)" },
   orderOk: { en: "Order received. We'll call you shortly.", ar: "تم استلام طلبك. سنتواصل معك قريباً." },
   orderFail: { en: "Could not send the order. Please try WhatsApp.", ar: "تعذّر إرسال الطلب. جرّب واتساب." },
+  orderOffline: {
+    en: "No internet connection — your order was not sent. Reconnect and try again.",
+    ar: "لا يوجد اتصال بالإنترنت — لم يتم إرسال الطلب. أعد الاتصال وحاول مرة أخرى.",
+  },
+  orderInvalid: {
+    en: "Please add a product and fill in your name and phone number.",
+    ar: "الرجاء إضافة منتج وإدخال الاسم ورقم الهاتف.",
+  },
+  sending: { en: "Sending your order…", ar: "جارٍ إرسال طلبك…" },
+  addedToast: { en: "added to your list", ar: "تمت إضافته إلى قائمتك" },
+  offline: { en: "You are offline. Some things may not work.", ar: "أنت غير متصل بالإنترنت. قد لا تعمل بعض الميزات." },
+  backOnline: { en: "Back online.", ar: "تم استعادة الاتصال." },
+  imgFail: { en: "Image could not load", ar: "تعذّر تحميل الصورة" },
   video: { en: "IN ACTION", ar: "شاهد المنتج" },
   follow: { en: "Follow ProClean", ar: "تابع بروكلين" },
   rights: { en: "All rights reserved.", ar: "جميع الحقوق محفوظة." },
 } as const;
+
+/* ---------------- hero → catalog focus bridge ---------------- */
+
+export const FOCUS_EVENT = "pc:focus-product";
+
+/** Scroll the catalog card for `id` into view and highlight it briefly. */
+export function focusProduct(id: string) {
+  window.dispatchEvent(new CustomEvent(FOCUS_EVENT, { detail: id }));
+}
 
 export type CopyKey = keyof typeof COPY;
 
