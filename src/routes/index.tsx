@@ -38,6 +38,7 @@ function Index() {
         <Catalog />
         <Footer />
         <CartDrawer />
+        <NetworkStatus />
         <Toaster position="top-center" richColors />
       </main>
     </AppProviders>
