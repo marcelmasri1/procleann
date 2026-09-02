@@ -116,10 +116,29 @@ export default function Hero() {
         }}
       />
 
+      {/* side / back bottles — behind the wordmark */}
+      <div className="absolute inset-0" style={{ zIndex: 2 }}>
+        {PRODUCTS.map((p, i) => {
+          const role = roleOf(i);
+          if (!role || role === "center") return null;
+          return (
+            <img
+              key={p.id}
+              src={p.image}
+              alt={p[lang].name}
+              draggable={false}
+              onClick={() => focusProduct(p.id)}
+              className="absolute top-1/2 w-auto cursor-pointer object-contain drop-shadow-2xl"
+              style={styleFor(role)}
+            />
+          );
+        })}
+      </div>
+
       {/* giant ghost wordmark */}
       <div
         className="pointer-events-none absolute inset-x-0 select-none text-center font-display leading-[0.8] text-white"
-        style={{ top: "12%", zIndex: 2, fontSize: "clamp(90px, 28vw, 380px)", letterSpacing: "-0.02em", opacity: 1 }}
+        style={{ top: "12%", zIndex: 3, fontSize: "clamp(90px, 28vw, 380px)", letterSpacing: "-0.02em", opacity: 1 }}
       >
         PROCLEAN
       </div>
@@ -139,22 +158,17 @@ export default function Hero() {
         </span>
       </div>
 
-      {/* bottle stack */}
-      <div className="absolute inset-0" style={{ zIndex: 4 }}>
-        {PRODUCTS.map((p, i) => {
-          const role = roleOf(i);
-          if (!role) return null;
-          return (
-            <img
-              key={p.id}
-              src={p.image}
-              alt={p[lang].name}
-              draggable={false}
-              className="absolute top-1/2 w-auto object-contain drop-shadow-2xl"
-              style={styleFor(role)}
-            />
-          );
-        })}
+      {/* active bottle — in front of the wordmark */}
+      <div className="absolute inset-0" style={{ zIndex: 20 }}>
+        <img
+          key={current.id}
+          src={current.image}
+          alt={current[lang].name}
+          draggable={false}
+          onClick={() => focusProduct(current.id)}
+          className="absolute top-1/2 w-auto cursor-pointer object-contain drop-shadow-2xl"
+          style={styleFor("center")}
+        />
       </div>
 
       {/* grain */}
