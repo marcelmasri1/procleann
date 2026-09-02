@@ -14,10 +14,15 @@ export default function CartDrawer() {
 
   const send = async () => {
     if (form.name.trim().length < 2 || form.phone.trim().length < 6 || !detailed.length) {
-      toast.error(t("orderFail"));
+      toast.error(t("orderInvalid"));
+      return;
+    }
+    if (typeof navigator !== "undefined" && !navigator.onLine) {
+      toast.error(t("orderOffline"));
       return;
     }
     setBusy(true);
+    const pending = toast.loading(t("sending"));
     try {
       const res = await submit({
         data: {
@@ -35,14 +40,16 @@ export default function CartDrawer() {
         },
       });
       if (res.ok) {
-        toast.success(t("orderOk"));
+        toast.success(t("orderOk"), { id: pending });
         clear();
         setOpen(false);
       } else {
-        toast.error(t("orderFail"));
+        toast.error(t("orderFail"), { id: pending });
       }
     } catch {
-      toast.error(t("orderFail"));
+      toast.error(typeof navigator !== "undefined" && !navigator.onLine ? t("orderOffline") : t("orderFail"), {
+        id: pending,
+      });
     } finally {
       setBusy(false);
     }
