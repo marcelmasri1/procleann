@@ -76,25 +76,25 @@ EN: Concentrated whitening and sanitizing solution built to remove deep stains, 
 
 AR: محلول مركّز للتبييض والتعقيم، مصمم لإزالة البقع العميقة، وتبييض الملابس البيضاء، وتطهير أسطح الحمام والمطبخ.
 
-Product 7 — Anti-Bacterial Liquid Hand Soap
+Product 7 — Anti-Bacterial Liquid Hand Soap (dove)
 
 EN: Gentle, moisturizing liquid hand gel designed to eliminate germs without drying out skin. Formulated with a soft, pleasant fragrance suitable for daily family use.
 
 AR: جل يدين سائل لطيف ومرطب، مصمم للقضاء على الجراثيم دون تجفيف البشرة. برائحة ناعمة ولطيفة تناسب الاستخدام اليومي لجميع أفراد العائلة.
 
-Product 8 — Floral Cleaner (Purple)
+Product 8 — Floral Cleaner (lavender)
 
 EN: Multi-surface home cleaner that provides a soft floral touch. Combines powerful surface cleaning with a soothing, long-lasting lavender fragrance.
 
 AR: منظف منزلي متعدد الأسطح بلمسة زهرية ناعمة، يجمع بين قوة التنظيف ورائحة اللافندر المهدئة التي تدوم طويلاً.
 
-Product 9 — Floral Cleaner (Pink)
+Product 9 — Floral Cleaner (cammy)
 
 EN: All-in-one floor and surface cleaner that removes dirt and grime while leaving rooms filled with a long-lasting, fresh blooming floral scent.
 
 AR: منظف شامل للأرضيات والأسطح يزيل الأوساخ والأتربة، ويترك المنزل معطراً برائحة زهور منعشة تدوم طويلاً.
 
-Product 10 — Floral Cleaner (Blue)
+Product 10 — Floral Cleaner (ocean breeze)
 
 EN: Multi-surface floor and home cleaner infused with a fresh ocean wave floral fragrance. Specially formulated to remove dirt and daily grime while keeping your home smelling clean and invigorated all day long.
 
