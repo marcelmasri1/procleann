@@ -152,9 +152,9 @@ export default function Hero() {
       <div
         className="pointer-events-none absolute inset-x-0 select-none text-center font-display leading-[0.8] text-white"
         style={{
-          top: "10%",
+          top: "12%",
           zIndex: 2,
-          fontSize: "clamp(64px, 19vw, 250px)",
+          fontSize: "clamp(90px, 28vw, 380px)",
           letterSpacing: "-0.02em",
           opacity: 1,
         }}
