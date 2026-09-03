@@ -1,32 +1,50 @@
-import { Instagram, Play } from "lucide-react";
+import { useRef, useState } from "react";
+import { Play } from "lucide-react";
 import { useLang } from "@/lib/store";
-
-const REEL_URL =
-  "https://www.instagram.com/reel/Dcoa0kTi6_j/?utm_source=ig_web_copy_link&igsi=NTc4MTIwNjQ2YQ==";
+import teaserVideo from "@/assets/video/proclean-teaser.mp4";
+import teaserPoster from "@/assets/video/proclean-teaser-poster.jpg";
 
 export default function VideoTeaser() {
   const { t } = useLang();
+  const videoRef = useRef<HTMLVideoElement>(null);
+  const [playing, setPlaying] = useState(false);
+
+  const start = () => {
+    setPlaying(true);
+    videoRef.current?.play();
+  };
 
   return (
     <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 sm:pb-24">
-      <a
-        href={REEL_URL}
-        target="_blank"
-        rel="noreferrer"
-        className="group flex flex-col items-center gap-6 overflow-hidden rounded-3xl border border-border bg-gradient-to-br from-primary to-primary/70 p-8 text-center shadow-soft transition-transform hover:scale-[1.01] sm:flex-row sm:text-left"
-      >
-        <div className="grid h-16 w-16 shrink-0 place-items-center rounded-full bg-white/15 backdrop-blur transition-colors group-hover:bg-white/25">
-          <Play className="h-7 w-7 fill-white text-white" />
-        </div>
-        <div className="flex-1">
-          <p className="font-display text-2xl text-primary-foreground sm:text-3xl">{t("video")}</p>
-          <p className="mt-1 text-sm text-primary-foreground/85">{t("videoBlurb")}</p>
-        </div>
-        <span className="inline-flex shrink-0 items-center gap-2 rounded-full bg-white px-5 py-3 text-sm font-semibold text-primary transition-opacity group-hover:opacity-90">
-          <Instagram className="h-4 w-4" />
-          {t("videoCta")}
-        </span>
-      </a>
+      <div className="mx-auto flex max-w-md flex-col items-center gap-4 text-center">
+        <p className="font-display text-2xl sm:text-3xl">{t("video")}</p>
+        <p className="text-sm text-muted-foreground">{t("videoBlurb")}</p>
+        <button
+          type="button"
+          onClick={start}
+          aria-label={t("video")}
+          className="group relative aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded-3xl border border-border bg-black shadow-soft"
+        >
+          <video
+            ref={videoRef}
+            src={teaserVideo}
+            poster={teaserPoster}
+            muted
+            playsInline
+            loop
+            onEnded={() => setPlaying(false)}
+            controls={playing}
+            className="h-full w-full object-cover"
+          />
+          {!playing && (
+            <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/35">
+              <span className="grid h-16 w-16 place-items-center rounded-full bg-white/90 shadow-soft">
+                <Play className="h-7 w-7 translate-x-0.5 fill-primary text-primary" />
+              </span>
+            </span>
+          )}
+        </button>
+      </div>
     </section>
   );
 }

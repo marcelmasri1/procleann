@@ -1,9 +1,10 @@
 import { Facebook, Instagram, MessageCircle } from "lucide-react";
 import { LINKS, useLang } from "@/lib/store";
+import { goExternal } from "@/lib/external-redirect";
 import logo from "@/assets/proclean-logo.jpg.asset.json";
 
 export default function Footer() {
-  const { t } = useLang();
+  const { lang, t } = useLang();
 
   return (
     <footer className="border-t border-border bg-card">
@@ -22,8 +23,10 @@ export default function Footer() {
         <div className="flex items-center gap-3">
           <a
             href={LINKS.instagram}
-            target="_blank"
-            rel="noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              goExternal(LINKS.instagram, "Instagram", lang);
+            }}
             aria-label="Instagram"
             className="grid h-11 w-11 place-items-center rounded-full border border-border text-muted-foreground hover:text-foreground"
           >
@@ -31,8 +34,10 @@ export default function Footer() {
           </a>
           <a
             href={LINKS.facebook}
-            target="_blank"
-            rel="noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              goExternal(LINKS.facebook, "Facebook", lang);
+            }}
             aria-label="Facebook"
             className="grid h-11 w-11 place-items-center rounded-full border border-border text-muted-foreground hover:text-foreground"
           >
@@ -40,8 +45,10 @@ export default function Footer() {
           </a>
           <a
             href={LINKS.whatsapp}
-            target="_blank"
-            rel="noreferrer"
+            onClick={(e) => {
+              e.preventDefault();
+              goExternal(LINKS.whatsapp, "WhatsApp", lang);
+            }}
             aria-label="WhatsApp"
             className="grid h-11 w-11 place-items-center rounded-full bg-accent text-accent-foreground"
           >

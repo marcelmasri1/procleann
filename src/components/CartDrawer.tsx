@@ -3,6 +3,7 @@ import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
 import { useCart, useLang, whatsappUrl } from "@/lib/store";
+import { goExternal } from "@/lib/external-redirect";
 import { placeOrder } from "@/lib/orders.functions";
 
 export default function CartDrawer() {
@@ -183,10 +184,10 @@ export default function CartDrawer() {
               </div>
               <a
                 href={whatsappUrl(detailed, total, lang)}
-                target="_blank"
-                rel="noreferrer"
-                onClick={() => {
-                  if (detailed.length) toast.success(t("waRedirect"));
+                onClick={(e) => {
+                  if (!detailed.length) return;
+                  e.preventDefault();
+                  goExternal(whatsappUrl(detailed, total, lang), "WhatsApp", lang);
                 }}
                 className="block rounded-full bg-accent px-4 py-3 text-center text-sm font-semibold text-accent-foreground"
               >
