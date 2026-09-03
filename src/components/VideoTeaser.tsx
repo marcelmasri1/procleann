@@ -23,7 +23,8 @@ export default function VideoTeaser() {
           type="button"
           onClick={start}
           aria-label={t("video")}
-          className="group relative aspect-[9/16] w-full max-w-[280px] overflow-hidden rounded-3xl border border-border bg-black shadow-soft"
+          className="group relative w-full max-w-[260px] overflow-hidden rounded-3xl border border-border bg-black shadow-soft"
+          style={{ aspectRatio: "920 / 1080" }}
         >
           <video
             ref={videoRef}

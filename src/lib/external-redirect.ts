@@ -7,13 +7,13 @@ const MESSAGES: Record<Lang, (platform: string) => string> = {
 };
 
 /**
- * Shows a brief "leaving this site" notice, then navigates the CURRENT tab
- * to the external destination (Instagram, Facebook, WhatsApp, etc.) instead
- * of silently opening a background tab the visitor might not notice.
+ * Shows a brief "leaving this site" notice. Pair with `target="_top"` on
+ * the actual <a> tag (not a JS-driven redirect) so the browser navigates
+ * immediately, on the real click, at the top-level browsing context -
+ * this both escapes any embedding iframe (Facebook/Instagram refuse to
+ * render inside one and show a connection error otherwise) and avoids
+ * async delays that can invalidate the click's navigation permission.
  */
-export function goExternal(url: string, platform: string, lang: Lang) {
+export function notifyLeaving(platform: string, lang: Lang) {
   toast.message(MESSAGES[lang](platform));
-  window.setTimeout(() => {
-    window.location.href = url;
-  }, 700);
 }

@@ -1,6 +1,6 @@
 import { Facebook, Instagram, MessageCircle } from "lucide-react";
 import { LINKS, useLang } from "@/lib/store";
-import { goExternal } from "@/lib/external-redirect";
+import { notifyLeaving } from "@/lib/external-redirect";
 import logo from "@/assets/proclean-logo.jpg.asset.json";
 
 export default function Footer() {
@@ -23,10 +23,9 @@ export default function Footer() {
         <div className="flex items-center gap-3">
           <a
             href={LINKS.instagram}
-            onClick={(e) => {
-              e.preventDefault();
-              goExternal(LINKS.instagram, "Instagram", lang);
-            }}
+            target="_top"
+            rel="noreferrer"
+            onClick={() => notifyLeaving("Instagram", lang)}
             aria-label="Instagram"
             className="grid h-11 w-11 place-items-center rounded-full border border-border text-muted-foreground hover:text-foreground"
           >
@@ -34,10 +33,9 @@ export default function Footer() {
           </a>
           <a
             href={LINKS.facebook}
-            onClick={(e) => {
-              e.preventDefault();
-              goExternal(LINKS.facebook, "Facebook", lang);
-            }}
+            target="_top"
+            rel="noreferrer"
+            onClick={() => notifyLeaving("Facebook", lang)}
             aria-label="Facebook"
             className="grid h-11 w-11 place-items-center rounded-full border border-border text-muted-foreground hover:text-foreground"
           >
@@ -45,10 +43,9 @@ export default function Footer() {
           </a>
           <a
             href={LINKS.whatsapp}
-            onClick={(e) => {
-              e.preventDefault();
-              goExternal(LINKS.whatsapp, "WhatsApp", lang);
-            }}
+            target="_top"
+            rel="noreferrer"
+            onClick={() => notifyLeaving("WhatsApp", lang)}
             aria-label="WhatsApp"
             className="grid h-11 w-11 place-items-center rounded-full bg-accent text-accent-foreground"
           >
