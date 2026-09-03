@@ -89,28 +89,28 @@ export default function Hero() {
         opacity: 1,
         z: 20,
         left: "50%",
-        size: mobile ? "min(52vh, 68vw)" : "min(62vh, 42vw)",
+        size: mobile ? "min(42vh, 60vw)" : "min(48vh, 32vw)",
       },
       left: {
         blur: 2,
         opacity: 0.85,
         z: 1,
         left: mobile ? "16%" : "26%",
-        size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
+        size: mobile ? "min(24vh, 30vw)" : "min(29vh, 17vw)",
       },
       right: {
         blur: 2,
         opacity: 0.85,
         z: 1,
         left: mobile ? "84%" : "74%",
-        size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
+        size: mobile ? "min(24vh, 30vw)" : "min(29vh, 17vw)",
       },
       back: {
         blur: 4,
         opacity: 1,
         z: 1,
         left: "50%",
-        size: mobile ? "min(24vh, 28vw)" : "min(30vh, 18vw)",
+        size: mobile ? "min(19vh, 24vw)" : "min(23vh, 14vw)",
       },
     }[role];
 
@@ -152,9 +152,9 @@ export default function Hero() {
       <div
         className="pointer-events-none absolute inset-x-0 select-none text-center font-display leading-[0.8] text-white"
         style={{
-          top: "12%",
+          top: "10%",
           zIndex: 2,
-          fontSize: "clamp(90px, 28vw, 380px)",
+          fontSize: "clamp(64px, 19vw, 250px)",
           letterSpacing: "-0.02em",
           opacity: 1,
         }}
