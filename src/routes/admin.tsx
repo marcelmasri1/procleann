@@ -77,10 +77,14 @@ function AdminPage() {
       } else {
         toast.error("Wrong password.");
       }
+    } catch (err) {
+      console.error("admin login failed:", err);
+      toast.error("Couldn't reach the server. Try again in a moment.");
     } finally {
       setChecking(false);
     }
   };
+
 
   const save = async (row: Row) => {
     setBusy(true);
