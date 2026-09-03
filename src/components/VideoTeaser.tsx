@@ -16,14 +16,14 @@ export default function VideoTeaser() {
 
   return (
     <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 sm:pb-24">
-      <div className="mx-auto flex max-w-md flex-col items-center gap-4 text-center">
+      <div className="mx-auto flex max-w-3xl flex-col items-center gap-4 text-center">
         <p className="font-display text-2xl sm:text-3xl">{t("video")}</p>
         <p className="text-sm text-muted-foreground">{t("videoBlurb")}</p>
         <button
           type="button"
           onClick={start}
           aria-label={t("video")}
-          className="group relative w-full max-w-[260px] overflow-hidden rounded-3xl border border-border bg-black shadow-soft"
+          className="group relative w-full max-w-[440px] overflow-hidden rounded-3xl border border-border bg-black shadow-soft sm:max-w-[520px]"
           style={{ aspectRatio: "920 / 1080" }}
         >
           <video
@@ -33,10 +33,12 @@ export default function VideoTeaser() {
             muted
             playsInline
             loop
+            preload="metadata"
             onEnded={() => setPlaying(false)}
             controls={playing}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
+
           {!playing && (
             <span className="absolute inset-0 flex items-center justify-center bg-black/25 transition-colors group-hover:bg-black/35">
               <span className="grid h-16 w-16 place-items-center rounded-full bg-white/90 shadow-soft">
