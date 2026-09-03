@@ -184,34 +184,27 @@ export default function Hero() {
         {PRODUCTS.map((p, i) => {
           const role = roleOf(i);
           if (!role) return null;
-          if (role === "center") {
-            return (
-              <button
-                key={p.id}
-                type="button"
-                onClick={() => scrollToProduct(p.id)}
-                aria-label={p[lang].name}
-                className="absolute top-1/2 w-auto cursor-pointer border-0 bg-transparent p-0"
-                style={styleFor(role)}
-              >
-                <img
-                  src={p.image}
-                  alt={p[lang].name}
-                  draggable={false}
-                  className="h-full w-auto object-contain drop-shadow-2xl"
-                />
-              </button>
-            );
-          }
+          const isCenter = role === "center";
           return (
-            <img
+            <button
               key={p.id}
-              src={p.image}
-              alt={p[lang].name}
-              draggable={false}
-              className="absolute top-1/2 w-auto object-contain drop-shadow-2xl"
+              type="button"
+              onClick={isCenter ? () => scrollToProduct(p.id) : undefined}
+              aria-label={isCenter ? p[lang].name : undefined}
+              aria-hidden={!isCenter}
+              tabIndex={isCenter ? 0 : -1}
+              className={`absolute top-1/2 w-auto border-0 bg-transparent p-0 ${
+                isCenter ? "cursor-pointer" : "pointer-events-none cursor-default"
+              }`}
               style={styleFor(role)}
-            />
+            >
+              <img
+                src={p.image}
+                alt={p[lang].name}
+                draggable={false}
+                className="h-full w-auto object-contain drop-shadow-2xl"
+              />
+            </button>
           );
         })}
       </div>
