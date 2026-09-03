@@ -89,28 +89,28 @@ export default function Hero() {
         opacity: 1,
         z: 20,
         left: "50%",
-        size: mobile ? "min(42vh, 60vw)" : "min(48vh, 32vw)",
+        size: mobile ? "min(52vh, 68vw)" : "min(62vh, 42vw)",
       },
       left: {
         blur: 2,
         opacity: 0.85,
         z: 1,
         left: mobile ? "16%" : "26%",
-        size: mobile ? "min(24vh, 30vw)" : "min(29vh, 17vw)",
+        size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
       },
       right: {
         blur: 2,
         opacity: 0.85,
         z: 1,
         left: mobile ? "84%" : "74%",
-        size: mobile ? "min(24vh, 30vw)" : "min(29vh, 17vw)",
+        size: mobile ? "min(30vh, 34vw)" : "min(38vh, 22vw)",
       },
       back: {
         blur: 4,
         opacity: 1,
         z: 1,
         left: "50%",
-        size: mobile ? "min(19vh, 24vw)" : "min(23vh, 14vw)",
+        size: mobile ? "min(24vh, 28vw)" : "min(30vh, 18vw)",
       },
     }[role];
 
