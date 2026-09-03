@@ -34,6 +34,7 @@ const COPY = {
   clear: { en: "Clear list", ar: "إفراغ القائمة" },
   waCheckout: { en: "Checkout via WhatsApp", ar: "إتمام الطلب عبر واتساب" },
   saveOrder: { en: "Place order", ar: "إرسال الطلب" },
+  continueShopping: { en: "Continue shopping", ar: "متابعة التسوق" },
   firstName: { en: "First name", ar: "الاسم الأول" },
   lastName: { en: "Last name", ar: "اسم العائلة" },
   phone: { en: "Phone number", ar: "رقم الهاتف" },

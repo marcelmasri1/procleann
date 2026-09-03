@@ -182,6 +182,12 @@ export default function CartDrawer() {
                   ${total.toFixed(2)}
                 </span>
               </div>
+              <button
+                onClick={() => setOpen(false)}
+                className="w-full rounded-full border border-border px-4 py-3 text-sm font-semibold text-foreground transition-colors hover:bg-muted"
+              >
+                {t("continueShopping")}
+              </button>
               <a
                 href={whatsappUrl(detailed, total, lang)}
                 target="_top"
