@@ -159,7 +159,7 @@ export const PRODUCTS: Product[] = [
       desc: "Multi-surface home cleaner that provides a soft floral touch. Combines powerful surface cleaning with a soothing, long-lasting lavender fragrance.",
     },
     ar: {
-      name: "منظف الأزهار — لافندر",
+      name: "منظف الأسطح — لافندر",
       desc: "منظف منزلي متعدد الأسطح بلمسة زهرية ناعمة، يجمع بين قوة التنظيف ورائحة اللافندر المهدئة التي تدوم طويلاً.",
     },
   },
@@ -176,7 +176,7 @@ export const PRODUCTS: Product[] = [
       desc: "All-in-one floor and surface cleaner that removes dirt and grime while leaving rooms filled with a long-lasting, fresh blooming floral scent.",
     },
     ar: {
-      name: "منظف الأزهار — كامي",
+      name: "منظف الأسطح — كامي",
       desc: "منظف شامل للأرضيات والأسطح يزيل الأوساخ والأتربة، ويترك المنزل معطراً برائحة زهور منعشة تدوم طويلاً.",
     },
   },
@@ -193,7 +193,7 @@ export const PRODUCTS: Product[] = [
       desc: "Multi-surface floor and home cleaner infused with a fresh ocean wave floral fragrance. Specially formulated to remove dirt and daily grime while keeping your home smelling clean and invigorated all day long.",
     },
     ar: {
-      name: "منظف الأزهار — نسيم المحيط",
+      name: "منظف الأسطح — نسيم المحيط",
       desc: "منظف متعدد الأسطح للأرضيات والمنزل، بعبق زهري منعش يشبه أمواج المحيط. تركيبة خاصة لإزالة الأوساخ اليومية مع الحفاظ على انتعاش المنزل طوال اليوم.",
     },
   },
@@ -206,12 +206,12 @@ export const PRODUCTS: Product[] = [
     color: "#1C97A8",
     panel: "#37B4C4",
     en: {
-      name: "Dishwash — Ocean Splash",
-      desc: "Heavy-duty liquid dishwashing detergent infused with a crisp ocean breeze scent. Effortlessly cuts through stubborn grease and dried food particles, leaving cookware sparkling clean.",
+      name: "Dishwash — Cool Mint",
+      desc: "Heavy-duty liquid dishwashing detergent infused with a crisp cool mint scent. Effortlessly cuts through stubborn grease and dried food particles, leaving cookware sparkling clean.",
     },
     ar: {
-      name: "غسيل الأطباق — نسيم المحيط",
-      desc: "منظف أطباق فائق القوة برائحة نسيم المحيط المنعشة، يزيل الدهون العنيدة وبقايا الطعام الجاف بسهولة، تاركاً الأواني نظيفة ولامعة.",
+      name: "غسيل الأطباق — النعناع المنعش",
+      desc: "منظف أطباق فائق القوة برائحة النعناع المنعشة، يزيل الدهون العنيدة وبقايا الطعام الجاف بسهولة، تاركاً الأواني نظيفة ولامعة.",
     },
   },
 ];
