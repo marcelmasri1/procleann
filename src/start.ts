@@ -28,12 +28,14 @@ const csrfMiddleware = createCsrfMiddleware({
 // Never let a missing/failed browser auth session block a server function call
 // (guest checkout must work even when no Supabase session can be read).
 const safeAttachSupabaseAuth = createMiddleware({ type: "function" }).client(async ({ next }) => {
+  let token: string | undefined;
   try {
-    return await attachSupabaseAuth.options.client!({ next } as never);
+    const { supabase } = await import("@/integrations/supabase/client");
+    token = (await supabase.auth.getSession()).data.session?.access_token;
   } catch (error) {
     console.warn("Supabase auth attach skipped:", error);
-    return next({ headers: {} });
   }
+  return next({ headers: token ? { Authorization: `Bearer ${token}` } : {} });
 });
 
 export const startInstance = createStart(() => ({
