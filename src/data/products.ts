@@ -152,8 +152,8 @@ export const PRODUCTS: Product[] = [
     price: 5.5,
     size: "4 L",
     category: "surface",
-    color: "#8558B8",
-    panel: "#A278CF",
+    color: "#9A8FD0",
+    panel: "#B6AEE0",
     en: {
       name: "Floral Cleaner — Lavender",
       desc: "Multi-surface home cleaner that provides a soft floral touch. Combines powerful surface cleaning with a soothing, long-lasting lavender fragrance.",
