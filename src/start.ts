@@ -1,7 +1,6 @@
 import { createStart, createCsrfMiddleware, createMiddleware } from "@tanstack/react-start";
 
 import { renderErrorPage } from "./lib/error-page";
-import { attachSupabaseAuth } from "@/integrations/supabase/auth-attacher";
 
 const errorMiddleware = createMiddleware().server(async ({ next }) => {
   try {
@@ -25,7 +24,20 @@ const csrfMiddleware = createCsrfMiddleware({
   filter: (ctx) => ctx.handlerType === "serverFn",
 });
 
+// Never let a missing/failed browser auth session block a server function call
+// (guest checkout must work even when no Supabase session can be read).
+const safeAttachSupabaseAuth = createMiddleware({ type: "function" }).client(async ({ next }) => {
+  let token: string | undefined;
+  try {
+    const { supabase } = await import("@/integrations/supabase/client");
+    token = (await supabase.auth.getSession()).data.session?.access_token;
+  } catch (error) {
+    console.warn("Supabase auth attach skipped:", error);
+  }
+  return next({ headers: token ? { Authorization: `Bearer ${token}` } : {} });
+});
+
 export const startInstance = createStart(() => ({
-  functionMiddleware: [attachSupabaseAuth],
+  functionMiddleware: [safeAttachSupabaseAuth],
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));
