@@ -23,21 +23,9 @@ const orderSchema = z.object({
 export const placeOrder = createServerFn({ method: "POST" })
   .inputValidator((data: unknown) => orderSchema.parse(data))
   .handler(async ({ data }) => {
-    const { createClient } = await import("@supabase/supabase-js");
-    const key = process.env["SUPABASE_PUBLISHABLE_KEY"]!;
-    const supabase = createClient(process.env["SUPABASE_URL"]!, key, {
-      auth: { persistSession: false, autoRefreshToken: false },
-      global: {
-        fetch: (input: RequestInfo | URL, init?: RequestInit) => {
-          const h = new Headers(init?.headers);
-          if (key.startsWith("sb_") && h.get("Authorization") === `Bearer ${key}`) h.delete("Authorization");
-          h.set("apikey", key);
-          return fetch(input, { ...init, headers: h });
-        },
-      },
-    });
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
 
-    const { error } = await supabase.from("orders").insert({
+    const { error } = await supabaseAdmin.from("orders").insert({
       customer_name: data.customer_name,
       customer_phone: data.customer_phone,
       address: data.address || null,
@@ -48,7 +36,7 @@ export const placeOrder = createServerFn({ method: "POST" })
 
     if (error) {
       console.error("placeOrder failed:", error.message);
-      return { ok: false as const };
+      return { ok: false as const, error: error.message };
     }
     return { ok: true as const };
   });

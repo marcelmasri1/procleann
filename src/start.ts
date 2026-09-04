@@ -25,7 +25,18 @@ const csrfMiddleware = createCsrfMiddleware({
   filter: (ctx) => ctx.handlerType === "serverFn",
 });
 
+// Never let a missing/failed browser auth session block a server function call
+// (guest checkout must work even when no Supabase session can be read).
+const safeAttachSupabaseAuth = createMiddleware({ type: "function" }).client(async ({ next }) => {
+  try {
+    return await attachSupabaseAuth.options.client!({ next } as never);
+  } catch (error) {
+    console.warn("Supabase auth attach skipped:", error);
+    return next({ headers: {} });
+  }
+});
+
 export const startInstance = createStart(() => ({
-  functionMiddleware: [attachSupabaseAuth],
+  functionMiddleware: [safeAttachSupabaseAuth],
   requestMiddleware: [errorMiddleware, csrfMiddleware],
 }));
