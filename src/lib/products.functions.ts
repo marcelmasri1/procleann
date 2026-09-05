@@ -97,3 +97,40 @@ export const adminDeleteProduct = createServerFn({ method: "POST" })
     }
     return { ok: true as const };
   });
+
+/** Admin image upload: stores the file in private storage and returns the
+ * public read-only URL the storefront should use. */
+export const adminUploadImage = createServerFn({ method: "POST" })
+  .inputValidator((data: unknown) =>
+    z
+      .object({
+        password: z.string(),
+        filename: z.string().trim().min(1).max(120),
+        dataUrl: z.string().max(14_000_000),
+      })
+      .parse(data),
+  )
+  .handler(async ({ data }) => {
+    if (!checkAdminPassword(data.password)) return { ok: false as const, error: "bad_password" };
+
+    const match = /^data:(image\/[a-z+]+);base64,(.+)$/i.exec(data.dataUrl);
+    if (!match) return { ok: false as const, error: "not_an_image" };
+    const contentType = match[1]!;
+    const bytes = Buffer.from(match[2]!, "base64");
+    if (bytes.byteLength > 8_000_000) return { ok: false as const, error: "too_large" };
+
+    const ext = (contentType.split("/")[1] ?? "png").replace("jpeg", "jpg");
+    const safe = data.filename.replace(/[^A-Za-z0-9._-]/g, "-").slice(0, 60);
+    const key = `${Date.now()}-${safe}`.replace(/\.[^.]*$/, "") + `.${ext}`;
+
+    const { supabaseAdmin } = await import("@/integrations/supabase/client.server");
+    const { error } = await supabaseAdmin.storage
+      .from("product-images")
+      .upload(key, bytes, { contentType, upsert: true });
+
+    if (error) {
+      console.error("adminUploadImage failed:", error.message);
+      return { ok: false as const, error: error.message };
+    }
+    return { ok: true as const, url: `/api/public/product-image/${key}` };
+  });
