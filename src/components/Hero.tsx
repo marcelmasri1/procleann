@@ -125,7 +125,7 @@ export default function Hero() {
     } as const;
   };
 
-  const current = PRODUCTS[active]!;
+  const current = PRODUCTS[active % n] ?? PRODUCTS[0]!;
 
   return (
     <section
