@@ -1,7 +1,6 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-import { PRODUCTS } from "@/data/products";
-import { useLang } from "@/lib/store";
+import { useLang, useProducts } from "@/lib/store";
 import logo from "@/assets/proclean-logo.jpg.asset.json";
 
 const EASE = "650ms cubic-bezier(0.4,0,0.2,1)";
@@ -13,6 +12,7 @@ type Role = "center" | "left" | "right" | "back";
 
 export default function Hero() {
   const { lang, t } = useLang();
+  const PRODUCTS = useProducts();
   const n = PRODUCTS.length;
   const [active, setActive] = useState(0);
   const locked = useRef(false);
@@ -125,7 +125,7 @@ export default function Hero() {
     } as const;
   };
 
-  const current = PRODUCTS[active]!;
+  const current = PRODUCTS[active % n] ?? PRODUCTS[0]!;
 
   return (
     <section
