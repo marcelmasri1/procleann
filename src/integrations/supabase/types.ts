@@ -50,6 +50,60 @@ export type Database = {
         }
         Relationships: []
       }
+      products: {
+        Row: {
+          category: string
+          color: string
+          created_at: string
+          desc_ar: string
+          desc_en: string
+          id: string
+          image_url: string | null
+          name_ar: string
+          name_en: string
+          panel: string
+          price: number
+          seed_key: string | null
+          size: string
+          sort_order: number
+          updated_at: string
+        }
+        Insert: {
+          category?: string
+          color?: string
+          created_at?: string
+          desc_ar?: string
+          desc_en?: string
+          id: string
+          image_url?: string | null
+          name_ar?: string
+          name_en?: string
+          panel?: string
+          price?: number
+          seed_key?: string | null
+          size?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Update: {
+          category?: string
+          color?: string
+          created_at?: string
+          desc_ar?: string
+          desc_en?: string
+          id?: string
+          image_url?: string | null
+          name_ar?: string
+          name_en?: string
+          panel?: string
+          price?: number
+          seed_key?: string | null
+          size?: string
+          sort_order?: number
+          updated_at?: string
+        }
+        Relationships: []
+      }
     }
     Views: {
       [_ in never]: never
