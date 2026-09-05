@@ -8,6 +8,8 @@ import {
   type ReactNode,
 } from "react";
 import { PRODUCTS, type Product } from "@/data/products";
+import { rowToProduct, type ProductRow } from "@/lib/product-mapping";
+import { listProducts } from "@/lib/products.functions";
 
 /* ---------------- language ---------------- */
 
@@ -88,10 +90,15 @@ type CartCtx = {
 };
 const CartContext = createContext<CartCtx | null>(null);
 
+/* ---------------- products (live from the database) ---------------- */
+
+const ProductsContext = createContext<Product[]>(PRODUCTS);
+
 export function AppProviders({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
   const [dark, setDark] = useState(false);
   const [lines, setLines] = useState<CartLine[]>([]);
+  const [products, setProducts] = useState<Product[]>(PRODUCTS);
   const [open, setOpen] = useState(false);
 
   useEffect(() => {
@@ -123,6 +130,21 @@ export function AppProviders({ children }: { children: ReactNode }) {
     localStorage.setItem("pc_cart", JSON.stringify(lines));
   }, [lines]);
 
+  // Products are editable from /admin, so always prefer the saved list and
+  // only fall back to the bundled one if the database can't be reached.
+  useEffect(() => {
+    let alive = true;
+    void listProducts()
+      .then((rows) => {
+        if (!alive || !Array.isArray(rows) || rows.length === 0) return;
+        setProducts((rows as unknown as ProductRow[]).map(rowToProduct));
+      })
+      .catch((err) => console.warn("product list fetch failed:", err));
+    return () => {
+      alive = false;
+    };
+  }, []);
+
   const t = useCallback((k: CopyKey) => COPY[k][lang], [lang]);
 
   const add = useCallback((id: string) => {
@@ -146,11 +168,11 @@ export function AppProviders({ children }: { children: ReactNode }) {
     () =>
       lines
         .map((l) => {
-          const product = PRODUCTS.find((p) => p.id === l.id);
+          const product = products.find((p) => p.id === l.id);
           return product ? { product, qty: l.qty } : null;
         })
         .filter((v): v is { product: Product; qty: number } => v !== null),
-    [lines],
+    [lines, products],
   );
 
   const cart = useMemo<CartCtx>(
@@ -171,7 +193,9 @@ export function AppProviders({ children }: { children: ReactNode }) {
   return (
     <LangContext.Provider value={{ lang, setLang, t }}>
       <ThemeContext.Provider value={{ dark, toggle: () => setDark((v) => !v) }}>
-        <CartContext.Provider value={cart}>{children}</CartContext.Provider>
+        <CartContext.Provider value={cart}>
+          <ProductsContext.Provider value={products}>{children}</ProductsContext.Provider>
+        </CartContext.Provider>
       </ThemeContext.Provider>
     </LangContext.Provider>
   );
@@ -187,6 +211,10 @@ export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error("useTheme must be used inside AppProviders");
   return ctx;
+}
+
+export function useProducts() {
+  return useContext(ProductsContext);
 }
 
 export function useCart() {

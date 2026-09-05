@@ -1,15 +1,16 @@
 import { useState } from "react";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
-import { CATEGORIES, PRODUCTS, type Category } from "@/data/products";
-import { useCart, useLang } from "@/lib/store";
+import { CATEGORIES, type Category } from "@/data/products";
+import { useCart, useLang, useProducts } from "@/lib/store";
 
 export default function Catalog() {
   const { lang, t } = useLang();
   const { add, setOpen } = useCart();
+  const products = useProducts();
   const [filter, setFilter] = useState<"all" | Category>("all");
 
-  const shown = filter === "all" ? PRODUCTS : PRODUCTS.filter((p) => p.category === filter);
+  const shown = filter === "all" ? products : products.filter((p) => p.category === filter);
 
   return (
     <section id="catalog" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
