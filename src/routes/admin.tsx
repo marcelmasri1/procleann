@@ -7,6 +7,7 @@ import {
   verifyAdminPassword,
   adminUpsertProduct,
   adminDeleteProduct,
+  adminUploadImage,
 } from "@/lib/products.functions";
 
 export const Route = createFileRoute("/admin")({
@@ -152,13 +153,20 @@ function AdminPage() {
       <div className="mt-8 space-y-3">
         {rows === null && <p className="text-sm text-muted-foreground">Loading…</p>}
         {rows?.map((row) => (
-          <ProductRow key={row.id} row={row} onSave={save} onDelete={remove} busy={busy} />
+          <ProductRow
+            key={row.id}
+            row={row}
+            password={password}
+            onSave={save}
+            onDelete={remove}
+            busy={busy}
+          />
         ))}
       </div>
 
       <div className="mt-10 rounded-2xl border border-dashed border-border p-4">
         <p className="mb-3 font-display text-xl">ADD PRODUCT</p>
-        <ProductForm row={draft} onChange={setDraft} />
+        <ProductForm row={draft} onChange={setDraft} password={password} />
         <button
           onClick={() => save(draft)}
           disabled={busy || !draft.id || !draft.name_en}
@@ -167,8 +175,7 @@ function AdminPage() {
           Add product
         </button>
         <p className="mt-2 text-xs text-muted-foreground">
-          "Id" must be unique (e.g. "p12"). Paste a direct image URL — file upload isn't wired up
-          yet.
+          "Id" must be unique (e.g. "p12"). You can upload a photo or paste an image link.
         </p>
       </div>
     </div>
@@ -177,11 +184,13 @@ function AdminPage() {
 
 function ProductRow({
   row,
+  password,
   onSave,
   onDelete,
   busy,
 }: {
   row: Row;
+  password: string;
   onSave: (r: Row) => void;
   onDelete: (id: string) => void;
   busy: boolean;
@@ -189,7 +198,7 @@ function ProductRow({
   const [local, setLocal] = useState(row);
   return (
     <div className="rounded-2xl border border-border bg-card p-4">
-      <ProductForm row={local} onChange={setLocal} idLocked />
+      <ProductForm row={local} onChange={setLocal} password={password} idLocked />
       <div className="mt-3 flex gap-2">
         <button
           onClick={() => onSave(local)}
@@ -213,10 +222,12 @@ function ProductRow({
 function ProductForm({
   row,
   onChange,
+  password,
   idLocked,
 }: {
   row: Row;
   onChange: (r: Row) => void;
+  password: string;
   idLocked?: boolean;
 }) {
   const set = <K extends keyof Row>(key: K, value: Row[K]) => onChange({ ...row, [key]: value });
@@ -266,12 +277,24 @@ function ProductForm({
         value={row.panel}
         onChange={(e) => set("panel", e.target.value)}
       />
-      <input
-        className={`${field} col-span-2`}
-        placeholder="image URL (optional — leave blank to keep original photo)"
-        value={row.image_url ?? ""}
-        onChange={(e) => set("image_url", e.target.value)}
-      />
+      <div className="col-span-2 flex items-center gap-3 sm:col-span-4">
+        {row.image_url ? (
+          <img
+            src={row.image_url}
+            alt=""
+            className="h-16 w-16 rounded-lg border border-border object-contain"
+          />
+        ) : null}
+        <div className="min-w-0 flex-1 space-y-2">
+          <input
+            className={field}
+            placeholder="image URL (optional — leave blank to keep original photo)"
+            value={row.image_url ?? ""}
+            onChange={(e) => set("image_url", e.target.value)}
+          />
+          <ImageUpload password={password} onUploaded={(url) => set("image_url", url)} />
+        </div>
+      </div>
       <input
         className={`${field} col-span-2`}
         placeholder="Name (English)"
@@ -301,5 +324,62 @@ function ProductForm({
         onChange={(e) => set("desc_ar", e.target.value)}
       />
     </div>
+  );
+}
+
+function ImageUpload({
+  password,
+  onUploaded,
+}: {
+  password: string;
+  onUploaded: (url: string) => void;
+}) {
+  const upload = useServerFn(adminUploadImage);
+  const [busy, setBusy] = useState(false);
+
+  const pick = async (file: File) => {
+    if (file.size > 8_000_000) {
+      toast.error("That photo is too big (max 8 MB).");
+      return;
+    }
+    setBusy(true);
+    try {
+      const dataUrl = await new Promise<string>((resolve, reject) => {
+        const reader = new FileReader();
+        reader.onload = () => resolve(String(reader.result));
+        reader.onerror = () => reject(reader.error);
+        reader.readAsDataURL(file);
+      });
+      const res = await upload({ data: { password, filename: file.name, dataUrl } });
+      if (res.ok && "url" in res) {
+        onUploaded(res.url);
+        toast.success("Photo uploaded — press Save to keep it.");
+      } else {
+        toast.error("Upload failed. Try a smaller JPG or PNG.");
+      }
+    } catch (err) {
+      console.error("upload failed:", err);
+      toast.error("Upload failed. Try again.");
+    } finally {
+      setBusy(false);
+    }
+  };
+
+  return (
+    <label className="inline-flex cursor-pointer items-center gap-2 text-xs text-muted-foreground">
+      <span className="rounded-full border border-border px-3 py-1 font-semibold">
+        {busy ? "Uploading…" : "Upload photo"}
+      </span>
+      <input
+        type="file"
+        accept="image/*"
+        className="hidden"
+        onChange={(e) => {
+          const f = e.target.files?.[0];
+          if (f) void pick(f);
+          e.target.value = "";
+        }}
+      />
+    </label>
   );
 }
