@@ -12,12 +12,12 @@ const orderSchema = z.object({
         id: z.string().max(20),
         name: z.string().max(160),
         qty: z.number().int().min(1).max(99),
-        price: z.number().min(0).max(10000),
+        price: z.number().min(0).max(10000000),
       }),
     )
     .min(1)
     .max(50),
-  total: z.number().min(0).max(100000),
+  total: z.number().min(0).max(100000000),
 });
 
 export const placeOrder = createServerFn({ method: "POST" })

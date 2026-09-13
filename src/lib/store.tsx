@@ -14,6 +14,8 @@ import { listProducts } from "@/lib/products.functions";
 /* ---------------- language ---------------- */
 
 export type Lang = "en" | "ar";
+export type Currency = "LBP" | "USD";
+export const LBP_PER_USD = 90000;
 
 const COPY = {
   tagline: { en: "PROFESSIONAL CLEAN", ar: "نظافة احترافية" },
@@ -69,6 +71,13 @@ export type CopyKey = keyof typeof COPY;
 type LangCtx = { lang: Lang; setLang: (l: Lang) => void; t: (k: CopyKey) => string };
 const LangContext = createContext<LangCtx | null>(null);
 
+type CurrencyCtx = {
+  currency: Currency;
+  toggleCurrency: () => void;
+  formatPrice: (priceLbp: number) => string;
+};
+const CurrencyContext = createContext<CurrencyCtx | null>(null);
+
 /* ---------------- theme ---------------- */
 
 type ThemeCtx = { dark: boolean; toggle: () => void };
@@ -97,6 +106,7 @@ const ProductsContext = createContext<Product[]>(PRODUCTS);
 export function AppProviders({ children }: { children: ReactNode }) {
   const [lang, setLang] = useState<Lang>("en");
   const [dark, setDark] = useState(false);
+  const [currency, setCurrency] = useState<Currency>("LBP");
   const [lines, setLines] = useState<CartLine[]>([]);
   const [products, setProducts] = useState<Product[]>(PRODUCTS);
   const [open, setOpen] = useState(false);
@@ -105,6 +115,7 @@ export function AppProviders({ children }: { children: ReactNode }) {
     const l = localStorage.getItem("pc_lang");
     if (l === "ar" || l === "en") setLang(l);
     if (localStorage.getItem("pc_dark") === "1") setDark(true);
+    if (localStorage.getItem("pc_currency") === "USD") setCurrency("USD");
     const c = localStorage.getItem("pc_cart");
     if (c) {
       try {
@@ -130,6 +141,10 @@ export function AppProviders({ children }: { children: ReactNode }) {
     localStorage.setItem("pc_cart", JSON.stringify(lines));
   }, [lines]);
 
+  useEffect(() => {
+    localStorage.setItem("pc_currency", currency);
+  }, [currency]);
+
   // Products are editable from /admin, so always prefer the saved list and
   // only fall back to the bundled one if the database can't be reached.
   useEffect(() => {
@@ -146,6 +161,14 @@ export function AppProviders({ children }: { children: ReactNode }) {
   }, []);
 
   const t = useCallback((k: CopyKey) => COPY[k][lang], [lang]);
+
+  const formatPrice = useCallback(
+    (priceLbp: number) =>
+      currency === "USD"
+        ? `$${(priceLbp / LBP_PER_USD).toFixed(2)}`
+        : `${new Intl.NumberFormat("en-US").format(priceLbp)} LBP`,
+    [currency],
+  );
 
   const add = useCallback((id: string) => {
     setLines((prev) => {
@@ -192,11 +215,15 @@ export function AppProviders({ children }: { children: ReactNode }) {
 
   return (
     <LangContext.Provider value={{ lang, setLang, t }}>
-      <ThemeContext.Provider value={{ dark, toggle: () => setDark((v) => !v) }}>
-        <CartContext.Provider value={cart}>
-          <ProductsContext.Provider value={products}>{children}</ProductsContext.Provider>
-        </CartContext.Provider>
-      </ThemeContext.Provider>
+      <CurrencyContext.Provider
+        value={{ currency, toggleCurrency: () => setCurrency((v) => (v === "LBP" ? "USD" : "LBP")), formatPrice }}
+      >
+        <ThemeContext.Provider value={{ dark, toggle: () => setDark((v) => !v) }}>
+          <CartContext.Provider value={cart}>
+            <ProductsContext.Provider value={products}>{children}</ProductsContext.Provider>
+          </CartContext.Provider>
+        </ThemeContext.Provider>
+      </CurrencyContext.Provider>
     </LangContext.Provider>
   );
 }
@@ -210,6 +237,12 @@ export function useLang() {
 export function useTheme() {
   const ctx = useContext(ThemeContext);
   if (!ctx) throw new Error("useTheme must be used inside AppProviders");
+  return ctx;
+}
+
+export function useCurrency() {
+  const ctx = useContext(CurrencyContext);
+  if (!ctx) throw new Error("useCurrency must be used inside AppProviders");
   return ctx;
 }
 
@@ -229,15 +262,20 @@ export const LINKS = {
   whatsapp: "https://wa.me/96179001163",
 };
 
-export function whatsappUrl(lines: { product: Product; qty: number }[], total: number, lang: Lang) {
+export function whatsappUrl(
+  lines: { product: Product; qty: number }[],
+  total: number,
+  lang: Lang,
+  formatPrice: (priceLbp: number) => string,
+) {
   const head =
     "Hello ProClean! I would like more information or to place an order for my shopping cart.";
   const body = lines
     .map(
       (l) =>
-        `• ${l.product[lang].name} (${l.product.size}) x${l.qty} — $${(l.product.price * l.qty).toFixed(2)}`,
+        `• ${l.product[lang].name} (${l.product.size}) x${l.qty} — ${formatPrice(l.product.price * l.qty)}`,
     )
     .join("\n");
-  const text = lines.length ? `${head}\n\n${body}\n\nTotal: $${total.toFixed(2)}` : head;
+  const text = lines.length ? `${head}\n\n${body}\n\nTotal: ${formatPrice(total)}` : head;
   return `${LINKS.whatsapp}?text=${encodeURIComponent(text)}`;
 }

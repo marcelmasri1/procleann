@@ -9,6 +9,7 @@ import p8 from "@/assets/products/p8.png";
 import p9 from "@/assets/products/p9.png";
 import p10 from "@/assets/products/p10.png";
 import p11 from "@/assets/products/p11.png";
+import p12 from "@/assets/products/p12.png";
 
 export type Category = "surface" | "laundry" | "dish" | "care";
 
@@ -30,7 +31,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p1",
     image: p1,
-    price: 4.5,
+    price: 350000,
     size: "4 L",
     category: "surface",
     color: "#1E7A66",
@@ -47,7 +48,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p2",
     image: p2,
-    price: 6.9,
+    price: 550000,
     size: "3 L",
     category: "laundry",
     color: "#0E9AA0",
@@ -64,7 +65,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p3",
     image: p3,
-    price: 2.4,
+    price: 200000,
     size: "750 ml",
     category: "dish",
     color: "#12BCCB",
@@ -81,7 +82,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p4",
     image: p4,
-    price: 2.4,
+    price: 200000,
     size: "750 ml",
     category: "dish",
     color: "#C9BE18",
@@ -98,7 +99,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p5",
     image: p5,
-    price: 3.2,
+    price: 150000,
     size: "500 ml",
     category: "surface",
     color: "#A9481C",
@@ -115,7 +116,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p6",
     image: p6,
-    price: 3.5,
+    price: 250000,
     size: "4 L",
     category: "laundry",
     color: "#2C5EA6",
@@ -149,7 +150,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p8",
     image: p8,
-    price: 5.5,
+    price: 350000,
     size: "4 L",
     category: "surface",
     color: "#9A8FD0",
@@ -166,7 +167,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p9",
     image: p9,
-    price: 5.5,
+    price: 350000,
     size: "4 L",
     category: "surface",
     color: "#DC3E77",
@@ -183,7 +184,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p10",
     image: p10,
-    price: 5.5,
+    price: 350000,
     size: "4 L",
     category: "surface",
     color: "#2AA3C2",
@@ -200,7 +201,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p11",
     image: p11,
-    price: 4.9,
+    price: 450000,
     size: "4 L",
     category: "dish",
     color: "#1C97A8",
@@ -212,6 +213,23 @@ export const PRODUCTS: Product[] = [
     ar: {
       name: "غسيل الأطباق — النعناع المنعش",
       desc: "منظف أطباق فائق القوة برائحة النعناع المنعشة، يزيل الدهون العنيدة وبقايا الطعام الجاف بسهولة، تاركاً الأواني نظيفة ولامعة.",
+    },
+  },
+  {
+    id: "p12",
+    image: p12,
+    price: 450000,
+    size: "4 L",
+    category: "dish",
+    color: "#D6B83F",
+    panel: "#E8D36C",
+    en: {
+      name: "Dishwash — Lemon",
+      desc: "Gentle yet powerful liquid dishwashing detergent infused with a refreshing lemon scent. Formulated to be soft on hands while deeply cleaning, sanitizing, and cutting through tough grease to leave your dishes sparkling clean.",
+    },
+    ar: {
+      name: "غسيل الأطباق — ليمون",
+      desc: "سائل جلي يدوي فعّال برائحة الليمون المنعشة، مصمم ليكون لطيفاً على اليدين بينما ينظف ويعقم بعمق. يقضي على الدهون والصعوبات بسهولة، ليعيد لأطباقك وأوانيك لمعانها ونظافتها الفائقة.",
     },
   },
 ];
