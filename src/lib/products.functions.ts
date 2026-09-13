@@ -47,7 +47,7 @@ export const verifyAdminPassword = createServerFn({ method: "POST" })
 const productSchema = z.object({
   id: z.string().trim().min(1).max(40),
   image_url: z.string().trim().max(500).optional().nullable(),
-  price: z.number().min(0).max(10000),
+  price: z.number().min(0).max(10000000),
   size: z.string().trim().max(40),
   category: z.enum(["surface", "laundry", "dish", "care"]),
   color: z.string().trim().max(20),

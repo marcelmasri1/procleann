@@ -2,11 +2,12 @@ import { useState } from "react";
 import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { CATEGORIES, type Category } from "@/data/products";
-import { useCart, useLang, useProducts } from "@/lib/store";
+import { useCart, useCurrency, useLang, useProducts } from "@/lib/store";
 
 export default function Catalog() {
   const { lang, t } = useLang();
   const { add, setOpen } = useCart();
+  const { formatPrice } = useCurrency();
   const products = useProducts();
   const [filter, setFilter] = useState<"all" | Category>("all");
 
@@ -62,7 +63,7 @@ export default function Catalog() {
                 {p[lang].desc}
               </p>
               <div className="mt-4 flex items-center justify-between gap-3">
-                <span className="font-display text-xl text-foreground">${p.price.toFixed(2)}</span>
+                <span className="font-display text-xl text-foreground">{formatPrice(p.price)}</span>
                 <button
                   onClick={() => {
                     add(p.id);

@@ -1,9 +1,10 @@
-import { Languages, Moon, Sun } from "lucide-react";
-import { useCart, useLang, useTheme } from "@/lib/store";
+import { CircleDollarSign, Languages, Moon, Sun } from "lucide-react";
+import { useCart, useCurrency, useLang, useTheme } from "@/lib/store";
 
 export default function TopBar() {
   const { lang, setLang } = useLang();
   const { dark, toggle } = useTheme();
+  const { currency, toggleCurrency } = useCurrency();
   const { open: cartOpen } = useCart();
 
   return (
@@ -20,6 +21,14 @@ export default function TopBar() {
       >
         <Languages className="h-4 w-4" />
         {lang === "en" ? "العربية" : "English"}
+      </button>
+      <button
+        onClick={toggleCurrency}
+        aria-label={currency === "LBP" ? "Show prices in US dollars" : "Show prices in Lebanese pounds"}
+        className="inline-flex items-center gap-1 rounded-full border border-white/50 bg-foreground/20 px-3 py-2 text-xs font-semibold text-white backdrop-blur transition-colors hover:bg-foreground/30"
+      >
+        <CircleDollarSign className="h-4 w-4" />
+        {currency === "LBP" ? "USD" : "LBP"}
       </button>
       <button
         onClick={toggle}

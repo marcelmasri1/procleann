@@ -2,12 +2,13 @@ import { useState } from "react";
 import { Minus, Plus, ShoppingBag, Trash2, X } from "lucide-react";
 import { useServerFn } from "@tanstack/react-start";
 import { toast } from "sonner";
-import { useCart, useLang, whatsappUrl } from "@/lib/store";
+import { useCart, useCurrency, useLang, whatsappUrl } from "@/lib/store";
 import { notifyLeaving } from "@/lib/external-redirect";
 import { placeOrder } from "@/lib/orders.functions";
 
 export default function CartDrawer() {
   const { lang, t } = useLang();
+  const { formatPrice } = useCurrency();
   const { open, setOpen, detailed, setQty, clear, total, count } = useCart();
   const submit = useServerFn(placeOrder);
   const [form, setForm] = useState({
@@ -105,7 +106,7 @@ export default function CartDrawer() {
                         {product[lang].name}
                       </p>
                       <p className="text-xs text-muted-foreground">
-                        {product.size} · ${product.price.toFixed(2)}
+                        {product.size} · {formatPrice(product.price)}
                       </p>
                       <div className="mt-1 flex items-center gap-2">
                         <button
@@ -179,7 +180,7 @@ export default function CartDrawer() {
               <div className="flex items-center justify-between">
                 <span className="text-sm text-muted-foreground">{t("total")}</span>
                 <span className="font-display text-2xl text-card-foreground">
-                  ${total.toFixed(2)}
+                  {formatPrice(total)}
                 </span>
               </div>
               <button
@@ -189,7 +190,7 @@ export default function CartDrawer() {
                 {t("continueShopping")}
               </button>
               <a
-                href={whatsappUrl(detailed, total, lang)}
+                href={whatsappUrl(detailed, total, lang, formatPrice)}
                 target="_top"
                 rel="noreferrer"
                 onClick={() => {
