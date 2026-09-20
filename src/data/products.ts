@@ -51,7 +51,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p2",
     image: p2,
-    price: 550000,
+    price: 540000,
     size: "3 L",
     category: "laundry",
     color: "#0E9AA0",
@@ -68,7 +68,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p3",
     image: p3,
-    price: 200000,
+    price: 180000,
     size: "750 ml",
     category: "dish",
     color: "#12BCCB",
@@ -85,7 +85,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p4",
     image: p4,
-    price: 200000,
+    price: 180000,
     size: "750 ml",
     category: "dish",
     color: "#C9BE18",
@@ -102,7 +102,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p5",
     image: p5,
-    price: 150000,
+    price: 180000,
     size: "500 ml",
     category: "surface",
     color: "#A9481C",
@@ -119,7 +119,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p6",
     image: p6,
-    price: 250000,
+    price: 270000,
     size: "4 L",
     category: "laundry",
     color: "#2C5EA6",
@@ -136,7 +136,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p7",
     image: p7,
-    price: 2.9,
+    price: 225000,
     size: "500 ml",
     category: "care",
     color: "#7FA9CC",
@@ -153,7 +153,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p8",
     image: p8,
-    price: 350000,
+    price: 360000,
     size: "4 L",
     category: "surface",
     color: "#9A8FD0",
@@ -170,7 +170,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p9",
     image: p9,
-    price: 350000,
+    price: 360000,
     size: "4 L",
     category: "surface",
     color: "#DC3E77",
@@ -187,7 +187,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p10",
     image: p10,
-    price: 350000,
+    price: 360000,
     size: "4 L",
     category: "surface",
     color: "#2AA3C2",
@@ -238,7 +238,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p13",
     image: p13,
-    price: 150000,
+    price: 225000,
     size: "500 ml",
     category: "care",
     color: "#8B4A45",
@@ -255,7 +255,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p14",
     image: p14,
-    price: 150000,
+    price: 225000,
     size: "500 ml",
     category: "care",
     color: "#D4B21A",
@@ -272,7 +272,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p15",
     image: p15,
-    price: 150000,
+    price: 225000,
     size: "500 ml",
     category: "care",
     color: "#E8829E",
