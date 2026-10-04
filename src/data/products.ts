@@ -31,13 +31,13 @@ export const PRODUCTS: Product[] = [
   {
     id: "p1",
     image: p1,
-    price: 350000,
+    price: 360000,
     size: "4 L",
     category: "surface",
     color: "#1E7A66",
     panel: "#2F9C84",
     en: {
-      name: "Surface Cleaner — Pine Fresh",
+      name: "Floral Cleaner — Pine Fresh",
       desc: "Deep-cleaning surface formula enriched with a crisp forest pine scent. Effectively cleans household surfaces while neutralizing unwanted odors.",
     },
     ar: {
@@ -65,7 +65,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p3",
     image: p3,
-    price: 180000,
+    price: 157500,
     size: "750 ml",
     category: "dish",
     color: "#12BCCB",
@@ -82,7 +82,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p4",
     image: p4,
-    price: 180000,
+    price: 157500,
     size: "750 ml",
     category: "dish",
     color: "#C9BE18",
