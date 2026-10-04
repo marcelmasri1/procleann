@@ -99,7 +99,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p5",
     image: p5,
-    price: 180000,
+    price: 157500,
     size: "500 ml",
     category: "surface",
     color: "#A9481C",
@@ -133,7 +133,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p7",
     image: p7,
-    price: 225000,
+    price: 180000,
     size: "500 ml",
     category: "care",
     color: "#7FA9CC",
