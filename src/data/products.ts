@@ -10,6 +10,9 @@ import p9 from "@/assets/products/p9.png";
 import p10 from "@/assets/products/p10.png";
 import p11 from "@/assets/products/p11.png";
 import p12 from "@/assets/products/p12.png";
+import p13 from "@/assets/products/p13.png";
+import p14 from "@/assets/products/p14.png";
+import p15 from "@/assets/products/p15.png";
 
 export type Category = "surface" | "laundry" | "dish" | "care";
 
@@ -230,6 +233,57 @@ export const PRODUCTS: Product[] = [
     ar: {
       name: "غسيل الأطباق — ليمون",
       desc: "سائل جلي يدوي فعّال برائحة الليمون المنعشة، مصمم ليكون لطيفاً على اليدين بينما ينظف ويعقم بعمق. يقضي على الدهون والصعوبات بسهولة، ليعيد لأطباقك وأوانيك لمعانها ونظافتها الفائقة.",
+    },
+  },
+  {
+    id: "p13",
+    image: p13,
+    price: 180000,
+    size: "500 ml",
+    category: "care",
+    color: "#D07870",
+    panel: "#E2B6B1",
+    en: {
+      name: "Anti-Bacterial Hand Gel — Oud Scent",
+      desc: "Gentle, antibacterial liquid hand gel designed to effectively eliminate germs while keeping skin hydrated. Infused with a rich, oriental Oud fragrance that delivers a warm, luxurious wash for daily family use.",
+    },
+    ar: {
+      name: "جل اليدين المضاد للبكتيريا — عطر العود",
+      desc: "جل سائل لليدين مقاوم للبكتيريا ينظف بلطف ويقضي على الجراثيم دون أن يسبب جفاف البشرة. ميز بعبير العود الشرقي الفاخر ليمنحك إحساساً بالأناقة والنظافة العميقة للاستخدام اليومي لكافة أفراد العائلة.",
+    },
+  },
+  {
+    id: "p14",
+    image: p14,
+    price: 180000,
+    size: "500 ml",
+    category: "care",
+    color: "#F0B8D8",
+    panel: "#F8C6E4",
+    en: {
+      name: "Anti-Bacterial Hand Gel — Bubble Gum",
+      desc: "Gentle, antibacterial liquid hand gel designed to effectively eliminate germs while keeping skin soft and moisturized. Formulated with a sweet, playful Bubble fragrance that makes hand hygiene delightful for the whole family.",
+    },
+    ar: {
+      name: "جل اليدين المضاد للبكتيريا — عطر البابل",
+      desc: "جل سائل لليدين مقاوم للبكتيريا يقضي على الجراثيم ويوفر ترطيباً لطيفاً لحماية يديك من الجفاف. يتميز برائحة العلكة (البابل) المنعشة والممتعة، مما يجعله خياراً مثالياً ومحبباً للاستخدام اليومي لجميع أفراد العائلة.",
+    },
+  },
+  {
+    id: "p15",
+    image: p15,
+    price: 180000,
+    size: "500 ml",
+    category: "care",
+    color: "#D8D070",
+    panel: "#E8DF66",
+    en: {
+      name: "Anti-Bacterial Hand Gel — Lemon Scent",
+      desc: "Gentle, antibacterial liquid hand gel designed to eliminate germs without drying out the skin. Infused with a crisp, refreshing Lemon fragrance that leaves hands feeling invigorated, clean, and beautifully scented every day.",
+    },
+    ar: {
+      name: "جل اليدين المضاد للبكتيريا — عطر الليمون",
+      desc: "جل سائل لليدين مقاوم للبكتيريا يعمل على إزالة الجراثيم بفعالية مع الحفاظ على ترطيب ونعومة البشرة. بعبير الليمون المنعش الذي يمنح يديك إحساساً فورياً بالحيوية والنظافة التامة للاستخدام العائلي اليومي.",
     },
   },
 ];
