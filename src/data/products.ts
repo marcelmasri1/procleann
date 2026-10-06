@@ -170,8 +170,8 @@ export const PRODUCTS: Product[] = [
     price: 360000,
     size: "4 L",
     category: "surface",
-    color: "#DC3E77",
-    panel: "#EC6394",
+    color: "#F898E0",
+    panel: "#F898E0",
     en: {
       name: "Floral Cleaner — Cammy",
       desc: "All-in-one floor and surface cleaner that removes dirt and grime while leaving rooms filled with a long-lasting, fresh blooming floral scent.",
