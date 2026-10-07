@@ -21,7 +21,7 @@ export type ProductRow = {
   sort_order?: number;
 };
 
-const CATS: Category[] = ["surface", "laundry", "dish", "care"];
+const CATS: Category[] = ["surface", "laundry", "dish", "care", "offer"];
 
 /** Turns a database row into the shape the storefront components expect. */
 export function rowToProduct(row: ProductRow): Product {

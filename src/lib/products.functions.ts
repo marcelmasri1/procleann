@@ -49,7 +49,7 @@ const productSchema = z.object({
   image_url: z.string().trim().max(500).optional().nullable(),
   price: z.number().min(0).max(10000000),
   size: z.string().trim().max(40),
-  category: z.enum(["surface", "laundry", "dish", "care"]),
+  category: z.enum(["surface", "laundry", "dish", "care", "offer"]),
   color: z.string().trim().max(20),
   panel: z.string().trim().max(20),
   name_en: z.string().trim().min(1).max(160),

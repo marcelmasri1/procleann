@@ -13,8 +13,9 @@ import p12 from "@/assets/products/p12.png";
 import p13 from "@/assets/products/p13.png";
 import p14 from "@/assets/products/p14.png";
 import p15 from "@/assets/products/p15.png";
+import p16 from "@/assets/products/p16.png";
 
-export type Category = "surface" | "laundry" | "dish" | "care";
+export type Category = "surface" | "laundry" | "dish" | "care" | "offer";
 
 export type Product = {
   id: string;
@@ -102,7 +103,7 @@ export const PRODUCTS: Product[] = [
   {
     id: "p5",
     image: p5,
-    price: 157500,
+    price: 180000,
     size: "500 ml",
     category: "surface",
     color: "#A9481C",
@@ -286,6 +287,23 @@ export const PRODUCTS: Product[] = [
       desc: "جل سائل لليدين مقاوم للبكتيريا يعمل على إزالة الجراثيم بفعالية مع الحفاظ على ترطيب ونعومة البشرة. بعبير الليمون المنعش الذي يمنح يديك إحساساً فورياً بالحيوية والنظافة التامة للاستخدام العائلي اليومي.",
     },
   },
+  {
+    id: "p16",
+    image: p16,
+    price: 1800000,
+    size: "5 products",
+    category: "offer",
+    color: "#B88B58",
+    panel: "#D5AD79",
+    en: {
+      name: "ProClean Complete Home Box",
+      desc: "One laundry liquid, one 500 ml antiseptic, one floral cleaner, one bleach, and one 4 L dishwash — packed together in a branded ProClean box.",
+    },
+    ar: {
+      name: "بوكس بروكلين المتكامل للمنزل",
+      desc: "منظف غسيل واحد، مطهر 500 مل واحد، منظف زهري واحد، مبيض واحد، وسائل جلي 4 لتر واحد — جميعها ضمن بوكس بروكلين المميز.",
+    },
+  },
 ];
 
 export const CATEGORIES: { id: "all" | Category; en: string; ar: string }[] = [
@@ -294,4 +312,5 @@ export const CATEGORIES: { id: "all" | Category; en: string; ar: string }[] = [
   { id: "laundry", en: "Laundry", ar: "الغسيل" },
   { id: "dish", en: "Dishwashing", ar: "غسيل الأطباق" },
   { id: "care", en: "Hand care", ar: "العناية باليدين" },
+  { id: "offer", en: "Offers", ar: "العروض" },
 ];

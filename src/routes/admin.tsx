@@ -19,7 +19,7 @@ type Row = {
   image_url: string | null;
   price: number;
   size: string;
-  category: "surface" | "laundry" | "dish" | "care";
+  category: "surface" | "laundry" | "dish" | "care" | "offer";
   color: string;
   panel: string;
   name_en: string;
@@ -250,6 +250,7 @@ function ProductForm({
         <option value="laundry">laundry</option>
         <option value="dish">dish</option>
         <option value="care">care</option>
+        <option value="offer">offer</option>
       </select>
       <input
         className={field}

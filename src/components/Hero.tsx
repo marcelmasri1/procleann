@@ -12,7 +12,7 @@ type Role = "center" | "left" | "right" | "back";
 
 export default function Hero() {
   const { lang, t } = useLang();
-  const PRODUCTS = useProducts();
+  const PRODUCTS = useProducts().filter((product) => product.category !== "offer");
   const n = PRODUCTS.length;
   const [active, setActive] = useState(0);
   const locked = useRef(false);
