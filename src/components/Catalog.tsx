@@ -3,6 +3,7 @@ import { Plus } from "lucide-react";
 import { toast } from "sonner";
 import { CATEGORIES, type Category } from "@/data/products";
 import { useCart, useCurrency, useLang, useProducts } from "@/lib/store";
+import { Button } from "@/components/ui/button";
 
 export default function Catalog() {
   const { lang, t } = useLang();
@@ -20,17 +21,16 @@ export default function Catalog() {
 
       <div className="mt-8 flex flex-wrap gap-2">
         {CATEGORIES.map((c) => (
-          <button
+          <Button
             key={c.id}
+            type="button"
+            variant={filter === c.id ? "default" : "outline"}
+            size="sm"
             onClick={() => setFilter(c.id)}
-            className={`rounded-full border px-4 py-2 text-xs font-semibold transition-colors ${
-              filter === c.id
-                ? "border-primary bg-primary text-primary-foreground"
-                : "border-border bg-card text-muted-foreground hover:text-foreground"
-            }`}
+            className="rounded-full px-4"
           >
             {c[lang]}
-          </button>
+          </Button>
         ))}
       </div>
 
@@ -40,41 +40,50 @@ export default function Catalog() {
           <article
             key={p.id}
             id={`product-${p.id}`}
-            className="flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft transition-shadow scroll-mt-24"
+            className={`flex flex-col overflow-hidden rounded-2xl border bg-card shadow-soft transition-shadow scroll-mt-24 ${
+              p.category === "offer" ? "border-primary col-span-2 sm:grid sm:grid-cols-2" : "border-border"
+            }`}
           >
             <div
-              className="relative aspect-square w-full"
+              className={`relative aspect-square w-full ${p.category === "offer" ? "sm:aspect-auto sm:min-h-[30rem]" : ""}`}
               style={{ background: `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)` }}
             >
+              {p.category === "offer" ? (
+                <span className="absolute left-4 top-4 z-10 rounded-full bg-destructive px-3 py-1 text-xs font-bold uppercase text-destructive-foreground">
+                  {lang === "ar" ? "عرض خاص" : "Special offer"}
+                </span>
+              ) : null}
               <img
                 src={p.image}
                 alt={p[lang].name}
                 loading="lazy"
-                className="absolute inset-0 h-full w-full object-contain p-4 drop-shadow-xl"
+                className={`absolute inset-0 h-full w-full object-contain drop-shadow-xl ${p.category === "offer" ? "p-2 sm:p-6" : "p-4"}`}
               />
             </div>
 
-            <div className="flex min-w-0 flex-1 flex-col p-4">
-              <h3 className="text-sm font-semibold text-card-foreground sm:text-base">
+            <div className={`flex min-w-0 flex-1 flex-col p-4 ${p.category === "offer" ? "justify-center sm:p-8" : ""}`}>
+              <h3 className={`font-semibold text-card-foreground ${p.category === "offer" ? "text-2xl sm:text-4xl" : "text-sm sm:text-base"}`}>
                 {p[lang].name}
               </h3>
-              <p className="mt-1 text-xs text-muted-foreground">{p.size}</p>
-              <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">
+              <p className={`mt-1 text-muted-foreground ${p.category === "offer" ? "text-sm font-semibold" : "text-xs"}`}>{p.size}</p>
+              <p className={`mt-2 leading-relaxed text-muted-foreground ${p.category === "offer" ? "text-sm sm:text-base" : "line-clamp-3 text-xs"}`}>
                 {p[lang].desc}
               </p>
               <div className="mt-4 flex items-center justify-between gap-3">
                 <span className="font-display text-xl text-foreground">{formatPrice(p.price)}</span>
-                <button
+                <Button
+                  type="button"
                   onClick={() => {
                     add(p.id);
                     toast.success(`${t("added")}: ${p[lang].name}`);
                     setOpen(true);
                   }}
-                  className="inline-flex shrink-0 items-center gap-1 rounded-full bg-primary px-3 py-2 text-xs font-semibold text-primary-foreground transition-opacity hover:opacity-90"
+                  size="sm"
+                  className="shrink-0 rounded-full px-3"
                 >
                   <Plus className="h-4 w-4" />
                   <span className="hidden sm:inline">{t("add")}</span>
-                </button>
+                </Button>
               </div>
             </div>
           </article>
