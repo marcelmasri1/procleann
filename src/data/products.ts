@@ -297,11 +297,11 @@ export const PRODUCTS: Product[] = [
     panel: "#D5AD79",
     en: {
       name: "ProClean Complete Home Box",
-      desc: "One laundry liquid, one 500 ml antiseptic, one floral cleaner, one bleach, and one 4 L dishwash — packed together in a branded ProClean box.",
+      desc: "A complete five-product home cleaning selection with laundry, antiseptic, floral, bleach, and dishwashing essentials.",
     },
     ar: {
       name: "بوكس بروكلين المتكامل للمنزل",
-      desc: "منظف غسيل واحد، مطهر 500 مل واحد، منظف زهري واحد، مبيض واحد، وسائل جلي 4 لتر واحد — جميعها ضمن بوكس بروكلين المميز.",
+      desc: "تشكيلة منزلية متكاملة من خمسة منتجات أساسية للغسيل والتطهير وتنظيف الأسطح والتبييض وغسيل الأطباق.",
     },
   },
 ];

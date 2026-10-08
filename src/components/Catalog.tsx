@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Plus } from "lucide-react";
+import { Check, Plus } from "lucide-react";
 import { toast } from "sonner";
 import { CATEGORIES, type Category } from "@/data/products";
 import { useCart, useCurrency, useLang, useProducts } from "@/lib/store";
@@ -12,7 +12,26 @@ export default function Catalog() {
   const products = useProducts();
   const [filter, setFilter] = useState<"all" | Category>("all");
 
-  const shown = filter === "all" ? products : products.filter((p) => p.category === filter);
+  const shown = [...(filter === "all" ? products : products.filter((p) => p.category === filter))].sort(
+    (a, b) => Number(b.category === "offer") - Number(a.category === "offer"),
+  );
+
+  const offerContents =
+    lang === "ar"
+      ? [
+          "منظف الغسيل الشامل 3 لتر",
+          "منظف ومطهر 2 في 1 سعة 500 مل",
+          "منظف بروكلين الزهري متعدد الأسطح 4 لتر",
+          "مبيض بروكلين قوي المفعول 4 لتر",
+          "سائل بروكلين لغسيل الأطباق 4 لتر",
+        ]
+      : [
+          "3 L All-in-One Laundry Liquid",
+          "500 ml 2-in-1 Antiseptic & Disinfectant Cleaner",
+          "4 L ProClean Floral Multi-Surface Cleaner",
+          "4 L ProClean Heavy-Duty Bleach",
+          "4 L ProClean Dishwashing Liquid",
+        ];
 
   return (
     <section id="catalog" className="mx-auto max-w-6xl px-4 py-16 sm:px-6 sm:py-24">
@@ -61,14 +80,33 @@ export default function Catalog() {
               />
             </div>
 
-            <div className={`flex min-w-0 flex-1 flex-col p-4 ${p.category === "offer" ? "justify-center sm:p-8" : ""}`}>
+            <div className={`flex min-w-0 flex-1 flex-col p-4 ${p.category === "offer" ? "justify-center sm:p-10" : ""}`}>
+              {p.category === "offer" ? (
+                <p className="mb-2 text-xs font-bold uppercase text-primary">
+                  {lang === "ar" ? "عرض التوفير المنزلي" : "Home value offer"}
+                </p>
+              ) : null}
               <h3 className={`font-semibold text-card-foreground ${p.category === "offer" ? "text-2xl sm:text-4xl" : "text-sm sm:text-base"}`}>
                 {p[lang].name}
               </h3>
-              <p className={`mt-1 text-muted-foreground ${p.category === "offer" ? "text-sm font-semibold" : "text-xs"}`}>{p.size}</p>
-              <p className={`mt-2 leading-relaxed text-muted-foreground ${p.category === "offer" ? "text-sm sm:text-base" : "line-clamp-3 text-xs"}`}>
-                {p[lang].desc}
-              </p>
+              {p.category === "offer" ? (
+                <>
+                  <p className="mt-3 text-sm leading-relaxed text-muted-foreground sm:text-base">{p[lang].desc}</p>
+                  <ul className="mt-5 space-y-2.5">
+                    {offerContents.map((item) => (
+                      <li key={item} className="flex items-start gap-2 text-sm text-card-foreground">
+                        <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </>
+              ) : (
+                <>
+                  <p className="mt-1 text-xs text-muted-foreground">{p.size}</p>
+                  <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-muted-foreground">{p[lang].desc}</p>
+                </>
+              )}
               <div className="mt-4 flex items-center justify-between gap-3">
                 <span className="font-display text-xl text-foreground">{formatPrice(p.price)}</span>
                 <Button
