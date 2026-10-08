@@ -6,4 +6,4 @@
 - [x] Refine the offer image with correctly packed, half-visible products and no price badge.
 - [x] Replace shorthand bundle contents with professional full English and Arabic product names.
 - [x] Improve the offer title and information layout.
-- [ ] Sync product data and verify the purchase flow.
+- [x] Sync product data and verify the purchase flow.
