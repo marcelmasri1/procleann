@@ -12,7 +12,7 @@ export default function Catalog() {
   const products = useProducts();
   const [filter, setFilter] = useState<"all" | Category>("all");
 
-  const shown = (filter === "all" ? products : products.filter((p) => p.category === filter)).toSorted(
+  const shown = [...(filter === "all" ? products : products.filter((p) => p.category === filter))].sort(
     (a, b) => Number(b.category === "offer") - Number(a.category === "offer"),
   );
 
