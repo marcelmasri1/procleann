@@ -66,10 +66,7 @@ export default function Catalog() {
             <div
               className={`relative aspect-square w-full ${p.category === "offer" ? "sm:aspect-auto sm:min-h-[30rem]" : ""}`}
               style={{
-                background:
-                  p.category === "offer"
-                    ? "radial-gradient(circle at 50% 42%, #FFFFFF 0%, #F7F7F5 68%, #EDEDEA 100%)"
-                    : `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)`,
+                background: p.category === "offer" ? "#FFFFFF" : `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)`,
               }}
             >
               {p.category === "offer" ? (
