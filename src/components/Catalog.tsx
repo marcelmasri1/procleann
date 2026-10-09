@@ -65,7 +65,9 @@ export default function Catalog() {
           >
             <div
               className={`relative aspect-square w-full ${p.category === "offer" ? "sm:aspect-auto sm:min-h-[30rem]" : ""}`}
-              style={{ background: `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)` }}
+              style={{
+                background: p.category === "offer" ? "#FFFFFF" : `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)`,
+              }}
             >
               {p.category === "offer" ? (
                 <span className="absolute left-4 top-4 z-10 rounded-full bg-destructive px-3 py-1 text-xs font-bold uppercase text-destructive-foreground">
