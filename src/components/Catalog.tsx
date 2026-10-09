@@ -66,19 +66,38 @@ export default function Catalog() {
             <div
               className={`relative aspect-square w-full ${p.category === "offer" ? "sm:aspect-auto sm:min-h-[30rem]" : ""}`}
               style={{
-                background: p.category === "offer" ? "#FFFFFF" : `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)`,
+                background:
+                  p.category === "offer"
+                    ? "radial-gradient(115% 85% at 50% 18%, #ffffff 0%, #fafbfd 42%, #f2f3f7 74%, #e6e8ef 100%)"
+                    : `linear-gradient(160deg, ${p.panel} 0%, ${p.color} 100%)`,
+                boxShadow: p.category === "offer" ? "inset 0 -46px 64px -34px rgba(15,23,42,0.14)" : undefined,
               }}
             >
               {p.category === "offer" ? (
-                <span className="absolute left-4 top-4 z-10 rounded-full bg-destructive px-3 py-1 text-xs font-bold uppercase text-destructive-foreground">
-                  {lang === "ar" ? "عرض خاص" : "Special offer"}
-                </span>
+                <>
+                  <span className="absolute left-4 top-4 z-10 rounded-full bg-destructive px-3 py-1 text-xs font-bold uppercase text-destructive-foreground">
+                    {lang === "ar" ? "عرض خاص" : "Special offer"}
+                  </span>
+                  <span
+                    aria-hidden
+                    className="pointer-events-none absolute inset-x-[10%] bottom-[7%] z-0 h-[16%] rounded-[50%]"
+                    style={{
+                      background:
+                        "radial-gradient(ellipse at center, rgba(15,23,42,0.24) 0%, rgba(15,23,42,0.11) 45%, rgba(15,23,42,0) 72%)",
+                      filter: "blur(7px)",
+                    }}
+                  />
+                </>
               ) : null}
               <img
                 src={p.image}
                 alt={p[lang].name}
                 loading="lazy"
-                className={`absolute inset-0 h-full w-full object-contain drop-shadow-xl ${p.category === "offer" ? "p-2 sm:p-6" : "p-4"}`}
+                className={`absolute inset-0 h-full w-full object-contain ${
+                  p.category === "offer"
+                    ? "z-[1] p-2 drop-shadow-[0_22px_26px_rgba(15,23,42,0.18)] sm:p-6"
+                    : "p-4 drop-shadow-xl"
+                }`}
               />
             </div>
 
