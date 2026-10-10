@@ -75,7 +75,7 @@ export const PRODUCTS: Product[] = [
     color: "#12BCCB",
     panel: "#3FD3DE",
     en: {
-      name: "Dishwashing Liquid — Cool Mint",
+      name: "Dishwash — Cool Mint",
       desc: "Refreshing mint-scented dish detergent formulated to tackle tough grease on plates and cookware while remaining gentle and non-irritating on hands.",
     },
     ar: {
