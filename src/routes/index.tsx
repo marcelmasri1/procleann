@@ -15,7 +15,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Shop ProClean Detergents: surface cleaners, laundry liquid, dishwashing liquid, bleach and hand soap. Order online or checkout via WhatsApp.",
+          "Shop ProClean Detergents: surface cleaners, laundry liquid, dishwashing liquid, bleach and hand gel. Order online or checkout via WhatsApp.",
       },
       { property: "og:title", content: "ProClean Detergents — Professional Clean" },
       {

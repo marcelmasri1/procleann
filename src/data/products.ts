@@ -143,12 +143,12 @@ export const PRODUCTS: Product[] = [
     color: "#7FA9CC",
     panel: "#9CC0DD",
     en: {
-      name: "Dove Anti-Bacterial Hand Soap",
-      desc: "Gentle, moisturizing liquid hand gel designed to eliminate germs without drying out skin. Formulated with a soft, pleasant fragrance suitable for daily family use.",
+      name: "Anti-Bacterial Hand Gel — Dove",
+      desc: "Gentle, antibacterial liquid hand gel designed to eliminate germs without drying out the skin. Formulated with a soft, pleasant fragrance suitable for daily family use.",
     },
     ar: {
-      name: "دوف — صابون يدين مضاد للبكتيريا",
-      desc: "جل يدين سائل لطيف ومرطب، مصمم للقضاء على الجراثيم دون تجفيف البشرة. برائحة ناعمة ولطيفة تناسب الاستخدام اليومي لجميع أفراد العائلة.",
+      name: "جل اليدين المضاد للبكتيريا — دوف",
+      desc: "جل سائل لليدين مقاوم للبكتيريا ينظف بلطف ويقضي على الجراثيم دون أن يسبب جفاف البشرة. برائحة ناعمة ولطيفة تناسب الاستخدام اليومي لجميع أفراد العائلة.",
     },
   },
   {
