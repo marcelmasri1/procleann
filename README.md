@@ -40,7 +40,7 @@ Instagram Profile Link: https://www.instagram.com/proclean.detergents?igsi=MTBwb
 
 Facebook Profile Link: https://www.facebook.com/share/1bXsqCdGi1/
 
-WhatsApp Direct Order/Inquiry Integration: "Checkout via WhatsApp" action redirecting to https://wa.me/96179001163?text=Hello%20ProClean!%20I%20would%20like%20more%20information%20or%20to%20place%20an%20order%20for%20my%20shopping%20cart. (formatted dynamically with itemized cart list contents). logo is uploaded as image 1 Product 1 — Surface Cleaner (Pine Fresh)
+WhatsApp Direct Order/Inquiry Integration: "Checkout via WhatsApp" action redirecting to https://wa.me/96171905370?text=Hello%20ProClean!%20I%20would%20like%20more%20information%20or%20to%20place%20an%20order%20for%20my%20shopping%20cart. (formatted dynamically with itemized cart list contents). logo is uploaded as image 1 Product 1 — Surface Cleaner (Pine Fresh)
 
 EN: Deep-cleaning surface formula enriched with a crisp forest pine scent. Effectively cleans household surfaces while neutralizing unwanted odors.
 

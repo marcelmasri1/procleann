@@ -212,7 +212,7 @@ export default function Hero() {
       {/* grain */}
       <div
         className="pointer-events-none absolute inset-0"
-        style={{ zIndex: 50, opacity: 0.4, backgroundImage: GRAIN, backgroundSize: "200px 200px" }}
+        style={{ zIndex: 50, opacity: 0.25, mixBlendMode: "soft-light", backgroundImage: GRAIN, backgroundSize: "200px 200px" }}
       />
 
       {/* bottom controls */}

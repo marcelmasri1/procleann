@@ -259,7 +259,7 @@ export function useCart() {
 export const LINKS = {
   instagram: "https://www.instagram.com/proclean.detergents?igsi=MTBwbjlxNGwxbDZ4eQ==",
   facebook: "https://www.facebook.com/share/1bXsqCdGi1/",
-  whatsapp: "https://wa.me/96179001163",
+  whatsapp: "https://wa.me/96171905370",
 };
 
 export function whatsappUrl(

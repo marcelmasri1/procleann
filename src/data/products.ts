@@ -1,19 +1,19 @@
-import p1 from "@/assets/products/p1.png";
-import p2 from "@/assets/products/p2.png";
-import p3 from "@/assets/products/p3.png";
-import p4 from "@/assets/products/p4.png";
-import p5 from "@/assets/products/p5.png";
-import p6 from "@/assets/products/p6.png";
-import p7 from "@/assets/products/p7.png";
-import p8 from "@/assets/products/p8.png";
-import p9 from "@/assets/products/p9.png";
-import p10 from "@/assets/products/p10.png";
-import p11 from "@/assets/products/p11.png";
-import p12 from "@/assets/products/p12.png";
-import p13 from "@/assets/products/p13.png";
-import p14 from "@/assets/products/p14.png";
-import p15 from "@/assets/products/p15.png";
-import p16 from "@/assets/products/p16.png";
+import p1 from "@/assets/products/p1.webp";
+import p2 from "@/assets/products/p2.webp";
+import p3 from "@/assets/products/p3.webp";
+import p4 from "@/assets/products/p4.webp";
+import p5 from "@/assets/products/p5.webp";
+import p6 from "@/assets/products/p6.webp";
+import p7 from "@/assets/products/p7.webp";
+import p8 from "@/assets/products/p8.webp";
+import p9 from "@/assets/products/p9.webp";
+import p10 from "@/assets/products/p10.webp";
+import p11 from "@/assets/products/p11.webp";
+import p12 from "@/assets/products/p12.webp";
+import p13 from "@/assets/products/p13.webp";
+import p14 from "@/assets/products/p14.webp";
+import p15 from "@/assets/products/p15.webp";
+import p16 from "@/assets/products/p16.webp";
 
 export type Category = "surface" | "laundry" | "dish" | "care" | "offer";
 
