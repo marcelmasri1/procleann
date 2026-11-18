@@ -78,6 +78,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
+      { name: "color-scheme", content: "only light" },
       { title: "ProClean Detergents" },
       { name: "description", content: "ProClean Detergents — household cleaning products made in Lebanon." },
       { name: "author", content: "ProClean Detergents" },
