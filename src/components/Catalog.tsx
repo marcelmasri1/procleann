@@ -19,15 +19,15 @@ export default function Catalog() {
   const offerContents =
     lang === "ar"
       ? [
-          "منظف الغسيل الشامل 3 لتر",
           "منظف ومطهر 2 في 1 سعة 500 مل",
+          "منظف الغسيل الشامل 3 لتر",
           "منظف بروكلين الزهري متعدد الأسطح 4 لتر",
           "مبيض بروكلين قوي المفعول 4 لتر",
           "سائل بروكلين لغسيل الأطباق 4 لتر",
         ]
       : [
-          "3 L All-in-One Laundry Liquid",
           "500 ml 2-in-1 Antiseptic & Disinfectant Cleaner",
+          "3 L All-in-One Laundry Liquid",
           "4 L ProClean Floral Multi-Surface Cleaner",
           "4 L ProClean Heavy-Duty Bleach",
           "4 L ProClean Dishwashing Liquid",
