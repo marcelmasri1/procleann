@@ -190,7 +190,7 @@ export default function CartDrawer() {
                 {t("continueShopping")}
               </button>
               <a
-                href={whatsappUrl(detailed, total, lang, formatPrice)}
+                href={whatsappUrl(detailed, total, formatPrice)}
                 target="_top"
                 rel="noreferrer"
                 onClick={() => {

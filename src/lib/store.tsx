@@ -262,20 +262,29 @@ export const LINKS = {
   whatsapp: "https://wa.me/96171905370",
 };
 
+/**
+ * The WhatsApp checkout message is fixed and bilingual (Arabic + English), so
+ * the business always receives the same readable order no matter which site
+ * language the customer was browsing in.
+ */
+const WA_HEAD =
+  "مرحباً بروكلين! هذا طلبي:\nHello ProClean! Here is my order:";
+const WA_HEAD_EMPTY =
+  "مرحباً بروكلين! أود الاستفسار أو وضع طلب.\nHello ProClean! I would like to ask or place an order.";
+
 export function whatsappUrl(
   lines: { product: Product; qty: number }[],
   total: number,
-  lang: Lang,
   formatPrice: (priceLbp: number) => string,
 ) {
-  const head =
-    "Hello ProClean! I would like more information or to place an order for my shopping cart.";
   const body = lines
     .map(
       (l) =>
-        `• ${l.product[lang].name} (${l.product.size}) x${l.qty} — ${formatPrice(l.product.price * l.qty)}`,
+        `• ${l.product.en.name} / ${l.product.ar.name} (${l.product.size}) x${l.qty} — ${formatPrice(l.product.price * l.qty)}`,
     )
     .join("\n");
-  const text = lines.length ? `${head}\n\n${body}\n\nTotal: ${formatPrice(total)}` : head;
+  const text = lines.length
+    ? `${WA_HEAD}\n\n${body}\n\nالمجموع / Total: ${formatPrice(total)}`
+    : WA_HEAD_EMPTY;
   return `${LINKS.whatsapp}?text=${encodeURIComponent(text)}`;
 }
