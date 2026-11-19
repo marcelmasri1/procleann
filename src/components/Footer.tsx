@@ -17,7 +17,19 @@ export default function Footer() {
           />
           <div className="min-w-0">
             <p className="font-display text-xl text-card-foreground">PROCLEAN DETERGENTS</p>
-            <p className="text-xs text-muted-foreground">{t("tagline")} · Lebanon · +961 79 001 163</p>
+            <p className="text-xs text-muted-foreground">
+              {t("tagline")} · Lebanon ·{" "}
+              <a
+                href={LINKS.whatsapp}
+                target="_top"
+                rel="noreferrer"
+                onClick={() => notifyLeaving("WhatsApp", lang)}
+                dir="ltr"
+                className="text-inherit underline-offset-4 hover:underline"
+              >
+                +961 71 905 370
+              </a>
+            </p>
           </div>
         </div>
         <div className="flex items-center gap-3">
