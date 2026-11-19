@@ -7,3 +7,7 @@
 - [x] Replace shorthand bundle contents with professional full English and Arabic product names.
 - [x] Improve the offer title and information layout.
 - [x] Sync product data and verify the purchase flow.
+- [x] Replace the old WhatsApp number everywhere, including the footer contact line.
+- [ ] Review how the site appears in Google and AI search, and fix what is off.
+- [ ] Add the search and AI-assistant details that help the site get found (metadata, structured data, robots, sitemap, llms.txt).
+- [ ] Report what the site could realistically rank for.
